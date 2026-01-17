@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "aws-cdk-lib": "^2.170.0",
+    "constructs": "^10.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "aws-cdk": "^2.170.0",
+    "source-map-support": "^0.5.21",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0"
+  },
+  "name": "stats-agent-team-cdk",
+  "scripts": {
+    "build": "tsc",
+    "cdk": "cdk",
+    "deploy": "cdk deploy",
+    "destroy": "cdk destroy",
+    "synth": "cdk synth",
+    "watch": "tsc -w"
+  },
+  "version": "1.0.0"
+}

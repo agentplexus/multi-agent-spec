@@ -1,0 +1,62 @@
+{
+  "name": "@agentplexus/multi-agent-spec",
+  "version": "1.0.0",
+  "description": "TypeScript SDK for Multi-Agent Spec - Zod schemas and types for multi-agent system definitions",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run clean && npm run build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint src --ext .ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "multi-agent",
+    "ai-agents",
+    "zod",
+    "schema",
+    "validation",
+    "claude",
+    "bedrock",
+    "agentcore"
+  ],
+  "author": "AgentPlexus",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/agentplexus/multi-agent-spec.git",
+    "directory": "sdk/typescript"
+  },
+  "bugs": {
+    "url": "https://github.com/agentplexus/multi-agent-spec/issues"
+  },
+  "homepage": "https://github.com/agentplexus/multi-agent-spec#readme",
+  "dependencies": {
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@vitest/coverage-v8": "^2.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/agentplexus/multi-agent-spec/main/schema/deployment/deployment.schema.json",
+  "title": "Multi-Agent Spec - Deployment Definition",
+  "description": "Schema for defining deployment targets and configurations for a multi-agent team",
+  "type": "object",
+  "required": ["team", "targets"],
+  "properties": {
+    "team": {
+      "type": "string",
+      "description": "Reference to the team definition (team name)"
+    },
+    "targets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/target"
+      },
+      "minItems": 1,
+      "description": "List of deployment targets"
+    }
+  },
+  "$defs": {
+    "target": {
+      "type": "object",
+      "required": ["name", "platform"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Unique name for this deployment target"
+        },
+        "platform": {
+          "type": "string",
+          "enum": [
+            "claude-code",
+            "kiro-cli",
+            "aws-agentcore",
+            "aws-eks",
+            "azure-aks",
+            "gcp-gke",
+            "kubernetes",
+            "docker-compose",
+            "agentkit-local"
+          ],
+          "description": "Target platform for deployment"
+        },
+        "priority": {
+          "type": "string",
+          "enum": ["p1", "p2", "p3"],
+          "default": "p2",
+          "description": "Deployment priority (p1=primary, p2=secondary, p3=experimental)"
+        },
+        "output": {
+          "type": "string",
+          "description": "Output directory for generated deployment artifacts"
+        },
+        "config": {
+          "oneOf": [
+            { "$ref": "#/$defs/claudeCodeConfig" },
+            { "$ref": "#/$defs/kiroCliConfig" },
+            { "$ref": "#/$defs/awsAgentCoreConfig" },
+            { "$ref": "#/$defs/kubernetesConfig" },
+            { "$ref": "#/$defs/dockerComposeConfig" }
+          ],
+          "description": "Platform-specific configuration"
+        }
+      }
+    },
+    "claudeCodeConfig": {
+      "type": "object",
+      "properties": {
+        "platform": { "const": "claude-code" },
+        "agentDir": {
+          "type": "string",
+          "default": ".claude/agents",
+          "description": "Directory for agent definitions"
+        },
+        "format": {
+          "type": "string",
+          "enum": ["markdown"],
+          "default": "markdown"
+        }
+      }
+    },
+    "kiroCliConfig": {
+      "type": "object",
+      "properties": {
+        "platform": { "const": "kiro-cli" },
+        "pluginDir": {
+          "type": "string",
+          "default": "plugins/kiro/agents",
+          "description": "Directory for Kiro agent plugins"
+        },
+        "format": {
+          "type": "string",
+          "enum": ["json"],
+          "default": "json"
+        }
+      }
+    },
+    "awsAgentCoreConfig": {
+      "type": "object",
+      "properties": {
+        "platform": { "const": "aws-agentcore" },
+        "region": {
+          "type": "string",
+          "default": "us-east-1",
+          "description": "AWS region for deployment"
+        },
+        "foundationModel": {
+          "type": "string",
+          "default": "anthropic.claude-3-sonnet-20240229-v1:0",
+          "description": "Bedrock foundation model ARN"
+        },
+        "iac": {
+          "type": "string",
+          "enum": ["cdk", "pulumi", "terraform"],
+          "default": "cdk",
+          "description": "Infrastructure as code tool"
+        },
+        "lambdaRuntime": {
+          "type": "string",
+          "default": "python3.11",
+          "description": "Runtime for Lambda tool implementations"
+        }
+      }
+    },
+    "kubernetesConfig": {
+      "type": "object",
+      "properties": {
+        "platform": { "const": "kubernetes" },
+        "namespace": {
+          "type": "string",
+          "default": "multi-agent",
+          "description": "Kubernetes namespace"
+        },
+        "helmChart": {
+          "type": "boolean",
+          "default": true,
+          "description": "Generate Helm chart"
+        },
+        "imageRegistry": {
+          "type": "string",
+          "description": "Container image registry"
+        },
+        "resourceLimits": {
+          "type": "object",
+          "properties": {
+            "cpu": { "type": "string", "default": "500m" },
+            "memory": { "type": "string", "default": "512Mi" }
+          }
+        }
+      }
+    },
+    "dockerComposeConfig": {
+      "type": "object",
+      "properties": {
+        "platform": { "const": "docker-compose" },
+        "networkMode": {
+          "type": "string",
+          "enum": ["bridge", "host"],
+          "default": "bridge"
+        }
+      }
+    }
+  }
+}

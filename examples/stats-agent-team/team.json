@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schema/orchestration/team.schema.json",
+  "name": "stats-agent-team",
+  "version": "1.0.0",
+  "description": "Multi-agent team for researching, extracting, and verifying statistics from web sources with full source attribution",
+  "agents": [
+    "stats-orchestrator",
+    "stats-research",
+    "stats-synthesis",
+    "stats-verification"
+  ],
+  "orchestrator": "stats-orchestrator",
+  "workflow": {
+    "type": "orchestrated",
+    "steps": [
+      {
+        "name": "research",
+        "agent": "stats-research",
+        "outputs": ["candidate_urls"]
+      },
+      {
+        "name": "synthesis",
+        "agent": "stats-synthesis",
+        "depends_on": ["research"],
+        "inputs": {
+          "urls": "research.candidate_urls"
+        },
+        "outputs": ["extracted_statistics"]
+      },
+      {
+        "name": "verification",
+        "agent": "stats-verification",
+        "depends_on": ["synthesis"],
+        "inputs": {
+          "statistics": "synthesis.extracted_statistics"
+        },
+        "outputs": ["verified_statistics"]
+      }
+    ]
+  },
+  "context": "This team coordinates statistics research with a focus on accuracy and source verification. The orchestrator manages the workflow, ensuring that only verified statistics with exact values and verbatim excerpts are returned to the user."
+}

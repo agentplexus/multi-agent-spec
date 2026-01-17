@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/agentplexus/multi-agent-spec/main/schema/agent/agent.schema.json",
+  "title": "Multi-Agent Spec - Agent Definition",
+  "description": "Schema for defining an AI agent in a multi-agent system",
+  "type": "object",
+  "required": ["name", "description"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*$",
+      "description": "Unique identifier for the agent (lowercase, hyphenated)"
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description of the agent's purpose and capabilities"
+    },
+    "model": {
+      "type": "string",
+      "enum": ["haiku", "sonnet", "opus"],
+      "default": "sonnet",
+      "description": "Model capability tier (mapped to platform-specific models)"
+    },
+    "tools": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/tool"
+      },
+      "description": "List of tools the agent can use"
+    },
+    "skills": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of skills the agent can invoke"
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Other agents this agent depends on or can spawn"
+    },
+    "instructions": {
+      "type": "string",
+      "description": "System prompt / instructions for the agent"
+    }
+  },
+  "$defs": {
+    "tool": {
+      "type": "string",
+      "enum": [
+        "WebSearch",
+        "WebFetch",
+        "Read",
+        "Write",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Edit",
+        "Task"
+      ],
+      "description": "Canonical tool name (mapped to platform-specific names)"
+    }
+  }
+}

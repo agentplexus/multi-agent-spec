@@ -1,0 +1,79 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "multi-agent-spec"
+version = "1.0.0"
+description = "Python SDK for Multi-Agent Spec - Pydantic models for multi-agent system definitions"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.10"
+authors = [
+    { name = "AgentPlexus" }
+]
+keywords = [
+    "multi-agent",
+    "ai-agents",
+    "pydantic",
+    "schema",
+    "validation",
+    "claude",
+    "bedrock",
+    "agentcore",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Typing :: Typed",
+]
+dependencies = [
+    "pydantic>=2.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=4.0.0",
+    "ruff>=0.4.0",
+    "mypy>=1.10.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/agentplexus/multi-agent-spec"
+Documentation = "https://github.com/agentplexus/multi-agent-spec#readme"
+Repository = "https://github.com/agentplexus/multi-agent-spec.git"
+Issues = "https://github.com/agentplexus/multi-agent-spec/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/multi_agent_spec"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "UP",  # pyupgrade
+]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --cov=multi_agent_spec --cov-report=term-missing"

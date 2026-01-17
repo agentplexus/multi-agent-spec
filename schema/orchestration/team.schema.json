@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/agentplexus/multi-agent-spec/main/schema/orchestration/team.schema.json",
+  "title": "Multi-Agent Spec - Team Definition",
+  "description": "Schema for defining a team of agents with orchestration patterns",
+  "type": "object",
+  "required": ["name", "version", "agents"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*$",
+      "description": "Team identifier (e.g., stats-agent-team)"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semantic version of the team definition"
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description of the team's purpose"
+    },
+    "agents": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "description": "List of agent names in the team (references agent definitions)"
+    },
+    "orchestrator": {
+      "type": "string",
+      "description": "Name of the orchestrator agent (must be in agents list)"
+    },
+    "workflow": {
+      "$ref": "#/$defs/workflow",
+      "description": "Workflow definition for agent coordination"
+    },
+    "context": {
+      "type": "string",
+      "description": "Shared context or background information for all agents"
+    }
+  },
+  "$defs": {
+    "workflow": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["sequential", "parallel", "dag", "orchestrated"],
+          "default": "orchestrated",
+          "description": "Workflow execution pattern"
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/step"
+          },
+          "description": "Ordered steps in the workflow (for sequential/dag types)"
+        }
+      }
+    },
+    "step": {
+      "type": "object",
+      "required": ["name", "agent"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Step identifier"
+        },
+        "agent": {
+          "type": "string",
+          "description": "Agent to execute this step"
+        },
+        "depends_on": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Steps that must complete before this step (for dag type)"
+        },
+        "inputs": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Input mappings from previous step outputs"
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Named outputs from this step"
+        }
+      }
+    }
+  }
+}
