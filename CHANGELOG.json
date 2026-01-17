@@ -1,0 +1,38 @@
+{
+  "ir_version": "1.0",
+  "project": "multi-agent-spec",
+  "repository": "https://github.com/agentplexus/multi-agent-spec",
+  "versioning": "semver",
+  "commit_convention": "conventional",
+  "maintainers": ["agentplexus"],
+  "releases": [
+    {
+      "version": "v0.1.0",
+      "date": "2026-01-17",
+      "highlights": [
+        { "description": "Initial release with platform-agnostic agent definitions and multi-language SDKs" }
+      ],
+      "added": [
+        { "description": "JSON schemas for agent, team, and deployment definitions", "commit": "ff347db" },
+        { "description": "Go SDK with model/tool mappings for Claude Code, Kiro CLI, AWS Bedrock, and AgentKit", "commit": "ff347db" },
+        { "description": "Python SDK with Pydantic models", "commit": "ff347db" },
+        { "description": "TypeScript SDK with Zod schemas", "commit": "ff347db" },
+        { "description": "Example stats-agent-team with multi-platform outputs", "commit": "ff347db" }
+      ],
+      "documentation": [
+        { "description": "README with architecture overview, schemas, and usage examples", "commit": "ff347db" },
+        { "description": "v0.1.0 release notes", "commit": "eafb9dd" }
+      ],
+      "infrastructure": [
+        { "description": "GitHub Actions CI workflow for Go SDK testing", "commit": "ff347db" },
+        { "description": "GitHub Actions lint workflow with golangci-lint", "commit": "ff347db" },
+        { "description": "CodeQL security scanning workflow", "commit": "ff347db" },
+        { "description": "Dependabot configuration", "commit": "ff347db" }
+      ],
+      "fixed": [
+        { "description": "CI workflows working-directory set to sdk/go", "commit": "df4f739" },
+        { "description": "golangci-lint gofmt formatting", "commit": "a179ad7" }
+      ]
+    }
+  ]
+}
