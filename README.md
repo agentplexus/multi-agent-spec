@@ -146,6 +146,33 @@ Canonical tool names map to platform-specific identifiers:
 | `Edit` | `Edit` | `edit` | Edit files |
 | `Task` | `Task` | `task` | Spawn sub-agents |
 
+## Installation
+
+### Go SDK
+
+```bash
+go get github.com/agentplexus/multi-agent-spec/sdk/go@v0.1.0
+```
+
+**Note for maintainers:** The Go module is located in `sdk/go/`. Per [Go module versioning](https://go.dev/ref/mod#vcs-version), tags for nested modules must be prefixed with the module path:
+
+```bash
+git tag sdk/go/v0.1.0
+git push origin sdk/go/v0.1.0
+```
+
+### Python SDK
+
+```bash
+pip install multi-agent-spec
+```
+
+### TypeScript SDK
+
+```bash
+npm install @agentplexus/multi-agent-spec
+```
+
 ## Usage with aiassistkit
 
 Generate platform-specific agents using `genagents`:
