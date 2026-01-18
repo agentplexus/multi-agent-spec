@@ -38,6 +38,49 @@ const (
 	ToolTask      Tool = "Task"
 )
 
+// TaskType represents how a task is executed.
+type TaskType string
+
+const (
+	TaskTypeCommand TaskType = "command"
+	TaskTypePattern TaskType = "pattern"
+	TaskTypeFile    TaskType = "file"
+	TaskTypeManual  TaskType = "manual"
+)
+
+// Task represents a task that an agent can perform.
+type Task struct {
+	// ID is the unique task identifier within this agent.
+	ID string `json:"id"`
+
+	// Description describes what this task validates or accomplishes.
+	Description string `json:"description,omitempty"`
+
+	// Type is how the task is executed (command, pattern, file, manual).
+	Type TaskType `json:"type,omitempty"`
+
+	// Command is the shell command to execute (for type: command).
+	Command string `json:"command,omitempty"`
+
+	// Pattern is the regex pattern to search for (for type: pattern).
+	Pattern string `json:"pattern,omitempty"`
+
+	// File is the file path to check (for type: file).
+	File string `json:"file,omitempty"`
+
+	// Files is a glob pattern for files to check (for type: pattern).
+	Files string `json:"files,omitempty"`
+
+	// Required indicates if task failure causes agent to report NO-GO.
+	Required *bool `json:"required,omitempty"`
+
+	// ExpectedOutput describes what constitutes success.
+	ExpectedOutput string `json:"expected_output,omitempty"`
+
+	// HumanInLoop describes when to prompt for human intervention.
+	HumanInLoop string `json:"human_in_loop,omitempty"`
+}
+
 // Agent represents an agent definition.
 type Agent struct {
 	// Name is the unique identifier for the agent (lowercase, hyphenated).
@@ -58,8 +101,14 @@ type Agent struct {
 	// Dependencies are other agents this agent depends on.
 	Dependencies []string `json:"dependencies,omitempty"`
 
+	// Requires lists external tools or binaries required (e.g., go, git).
+	Requires []string `json:"requires,omitempty"`
+
 	// Instructions is the system prompt for the agent.
 	Instructions string `json:"instructions,omitempty"`
+
+	// Tasks are the tasks this agent can perform.
+	Tasks []Task `json:"tasks,omitempty"`
 }
 
 // NewAgent creates a new Agent with the given name and description.

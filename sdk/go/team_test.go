@@ -28,8 +28,12 @@ func TestStepSerialization(t *testing.T) {
 		Name:      "research",
 		Agent:     "researcher",
 		DependsOn: []string{"init"},
-		Inputs:    map[string]string{"topic": "init.topic"},
-		Outputs:   []string{"results"},
+		Inputs: []Port{
+			{Name: "topic", Type: PortTypeString, From: "init.topic"},
+		},
+		Outputs: []Port{
+			{Name: "results", Type: PortTypeObject},
+		},
 	}
 
 	data, err := json.Marshal(step)
@@ -51,8 +55,11 @@ func TestStepSerialization(t *testing.T) {
 	if len(decoded.DependsOn) != 1 {
 		t.Errorf("len(DependsOn) = %d, want 1", len(decoded.DependsOn))
 	}
-	if decoded.Inputs["topic"] != "init.topic" {
-		t.Errorf("Inputs[topic] = %q, want %q", decoded.Inputs["topic"], "init.topic")
+	if len(decoded.Inputs) != 1 || decoded.Inputs[0].Name != "topic" {
+		t.Errorf("Inputs[0].Name = %q, want %q", decoded.Inputs[0].Name, "topic")
+	}
+	if decoded.Inputs[0].From != "init.topic" {
+		t.Errorf("Inputs[0].From = %q, want %q", decoded.Inputs[0].From, "init.topic")
 	}
 }
 

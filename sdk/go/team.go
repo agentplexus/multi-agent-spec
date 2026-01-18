@@ -1,5 +1,7 @@
 package multiagentspec
 
+import "encoding/json"
+
 // WorkflowType represents the workflow execution pattern.
 type WorkflowType string
 
@@ -9,6 +11,42 @@ const (
 	WorkflowDAG          WorkflowType = "dag"
 	WorkflowOrchestrated WorkflowType = "orchestrated"
 )
+
+// PortType represents the data type of a port.
+type PortType string
+
+const (
+	PortTypeString  PortType = "string"
+	PortTypeNumber  PortType = "number"
+	PortTypeBoolean PortType = "boolean"
+	PortTypeObject  PortType = "object"
+	PortTypeArray   PortType = "array"
+	PortTypeFile    PortType = "file"
+)
+
+// Port represents a typed input or output for a workflow step.
+type Port struct {
+	// Name is the port identifier (e.g., version_recommendation, test_results).
+	Name string `json:"name"`
+
+	// Type is the data type of this port.
+	Type PortType `json:"type,omitempty"`
+
+	// Description is a human-readable description of this data.
+	Description string `json:"description,omitempty"`
+
+	// Required indicates whether this input is required (inputs only).
+	Required *bool `json:"required,omitempty"`
+
+	// From is the source reference as 'step_name.output_name' (inputs only).
+	From string `json:"from,omitempty"`
+
+	// Schema is a JSON Schema for validating this port's data.
+	Schema json.RawMessage `json:"schema,omitempty"`
+
+	// Default is the default value if not provided (inputs only).
+	Default interface{} `json:"default,omitempty"`
+}
 
 // Step represents a workflow step definition.
 type Step struct {
@@ -21,11 +59,11 @@ type Step struct {
 	// DependsOn lists steps that must complete before this step.
 	DependsOn []string `json:"depends_on,omitempty"`
 
-	// Inputs are mappings from previous step outputs.
-	Inputs map[string]string `json:"inputs,omitempty"`
+	// Inputs are typed data inputs consumed by this step.
+	Inputs []Port `json:"inputs,omitempty"`
 
-	// Outputs are named outputs from this step.
-	Outputs []string `json:"outputs,omitempty"`
+	// Outputs are typed data outputs produced by this step.
+	Outputs []Port `json:"outputs,omitempty"`
 }
 
 // Workflow represents a workflow definition.
