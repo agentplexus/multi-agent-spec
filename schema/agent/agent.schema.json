@@ -45,6 +45,13 @@
     "instructions": {
       "type": "string",
       "description": "System prompt / instructions for the agent"
+    },
+    "tasks": {
+      "type": "array",
+      "description": "Tasks this agent can perform",
+      "items": {
+        "$ref": "#/$defs/task"
+      }
     }
   },
   "$defs": {
@@ -62,6 +69,56 @@
         "Task"
       ],
       "description": "Canonical tool name (mapped to platform-specific names)"
+    },
+    "task": {
+      "type": "object",
+      "required": ["id", "description"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*$",
+          "description": "Unique task identifier within this agent"
+        },
+        "description": {
+          "type": "string",
+          "description": "What this task validates or accomplishes"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["command", "pattern", "file", "manual"],
+          "default": "manual",
+          "description": "How the task is executed"
+        },
+        "command": {
+          "type": "string",
+          "description": "Shell command to execute (for type: command)"
+        },
+        "pattern": {
+          "type": "string",
+          "description": "Regex pattern to search for (for type: pattern)"
+        },
+        "file": {
+          "type": "string",
+          "description": "File path to check (for type: file)"
+        },
+        "files": {
+          "type": "string",
+          "description": "Glob pattern for files to check (for type: pattern)"
+        },
+        "required": {
+          "type": "boolean",
+          "default": true,
+          "description": "If true, task failure causes agent to report NO-GO"
+        },
+        "expected_output": {
+          "type": "string",
+          "description": "Description of what constitutes success"
+        },
+        "human_in_loop": {
+          "type": "string",
+          "description": "When to prompt for human intervention"
+        }
+      }
     }
   }
 }

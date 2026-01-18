@@ -56,7 +56,7 @@
     },
     "team": {
       "type": "object",
-      "required": ["id", "name", "checks", "status"],
+      "required": ["id", "name", "tasks", "status"],
       "properties": {
         "id": {
           "type": "string",
@@ -77,38 +77,49 @@
           "enum": ["haiku", "sonnet", "opus"],
           "description": "LLM model used by this agent"
         },
-        "checks": {
+        "depends_on": {
           "type": "array",
-          "description": "Individual validation checks",
           "items": {
-            "$ref": "#/$defs/check"
+            "type": "string"
+          },
+          "description": "IDs of upstream teams this team depends on (for DAG sorting)"
+        },
+        "tasks": {
+          "type": "array",
+          "description": "Individual task results (one per line in reports)",
+          "items": {
+            "$ref": "#/$defs/task_result"
           }
         },
         "status": {
           "$ref": "#/$defs/status",
-          "description": "Overall status for this team (computed from checks)"
+          "description": "Overall status for this team (computed from tasks)"
         }
       }
     },
-    "check": {
+    "task_result": {
       "type": "object",
       "required": ["id", "status"],
       "properties": {
         "id": {
           "type": "string",
           "pattern": "^[a-z][a-z0-9-]*$",
-          "description": "Check identifier"
+          "description": "Task identifier (matches task id in agent definition)"
         },
         "status": {
           "$ref": "#/$defs/status"
         },
         "detail": {
           "type": "string",
-          "description": "Additional information about the check result"
+          "description": "Additional information about the task result"
+        },
+        "duration_ms": {
+          "type": "integer",
+          "description": "Task execution time in milliseconds"
         },
         "metadata": {
           "type": "object",
-          "description": "Structured data about the check",
+          "description": "Structured data about the task execution",
           "additionalProperties": true
         }
       }

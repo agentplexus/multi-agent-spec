@@ -31,6 +31,25 @@ func (s Status) Icon() string {
 	}
 }
 
+// TaskResult represents the result of executing a single task.
+// Each task corresponds to a task defined in the agent's task list.
+type TaskResult struct {
+	// ID is the task identifier (matches task id in agent definition)
+	ID string `json:"id"`
+
+	// Status is GO, WARN, NO-GO, or SKIP
+	Status Status `json:"status"`
+
+	// Detail is optional additional information about the result
+	Detail string `json:"detail,omitempty"`
+
+	// DurationMs is the task execution time in milliseconds
+	DurationMs int64 `json:"duration_ms,omitempty"`
+
+	// Metadata allows tasks to include structured data
+	Metadata map[string]interface{} `json:"metadata,omitempty"`
+}
+
 // AgentResult is the JSON-serializable output from each validation agent.
 // This is the intermediate representation that agents produce and the
 // coordinator consumes to build the final TeamReport.
@@ -50,10 +69,10 @@ type AgentResult struct {
 	// Outputs are values produced by this agent for downstream agents
 	Outputs map[string]interface{} `json:"outputs,omitempty"`
 
-	// Checks are the individual validation checks performed
-	Checks []Check `json:"checks"`
+	// Tasks are the individual task results (one per line in reports)
+	Tasks []TaskResult `json:"tasks"`
 
-	// Status is the overall status for this agent (computed from checks)
+	// Status is the overall status for this agent (computed from tasks)
 	Status Status `json:"status"`
 
 	// ExecutedAt is when the agent completed execution
@@ -67,21 +86,6 @@ type AgentResult struct {
 
 	// Error is set if the agent failed to execute
 	Error string `json:"error,omitempty"`
-}
-
-// Check represents a single validation check result.
-type Check struct {
-	// ID is the check identifier (e.g., "build", "tests", "version-recommendation")
-	ID string `json:"id"`
-
-	// Status is GO, WARN, NO-GO, or SKIP
-	Status Status `json:"status"`
-
-	// Detail is optional additional information
-	Detail string `json:"detail,omitempty"`
-
-	// Metadata allows checks to include structured data
-	Metadata map[string]interface{} `json:"metadata,omitempty"`
 }
 
 // TeamSection represents a team/agent section in the report.
@@ -101,10 +105,10 @@ type TeamSection struct {
 	// DependsOn lists the IDs of upstream teams in the DAG
 	DependsOn []string `json:"depends_on,omitempty"`
 
-	// Checks are the validation checks for this team
-	Checks []Check `json:"checks"`
+	// Tasks are the task results for this team (one per line in reports)
+	Tasks []TaskResult `json:"tasks"`
 
-	// Status is the overall status (computed from checks)
+	// Status is the overall status (computed from tasks)
 	Status Status `json:"status"`
 }
 
@@ -139,9 +143,9 @@ type TeamReport struct {
 	GeneratedBy string `json:"generated_by,omitempty"`
 }
 
-// ComputeStatus computes the overall status from checks.
+// ComputeStatus computes the overall status from tasks.
 func (a *AgentResult) ComputeStatus() Status {
-	return computeStatusFromChecks(a.Checks)
+	return computeStatusFromTasks(a.Tasks)
 }
 
 // ToTeamSection converts an AgentResult to a TeamSection for the report.
@@ -151,14 +155,14 @@ func (a *AgentResult) ToTeamSection() TeamSection {
 		Name:    a.AgentID,
 		AgentID: a.AgentID,
 		Model:   a.AgentModel,
-		Checks:  a.Checks,
+		Tasks:   a.Tasks,
 		Status:  a.ComputeStatus(),
 	}
 }
 
 // OverallStatus computes the overall status for a team section.
 func (t *TeamSection) OverallStatus() Status {
-	return computeStatusFromChecks(t.Checks)
+	return computeStatusFromTasks(t.Tasks)
 }
 
 // ComputeOverallStatus computes the overall status from all teams.
@@ -346,17 +350,17 @@ func ParseTeamReport(data []byte) (*TeamReport, error) {
 	return &report, nil
 }
 
-// computeStatusFromChecks is a helper to compute status from a slice of checks.
-func computeStatusFromChecks(checks []Check) Status {
+// computeStatusFromTasks is a helper to compute status from a slice of task results.
+func computeStatusFromTasks(tasks []TaskResult) Status {
 	hasNoGo := false
 	hasWarn := false
 	allSkipped := true
 
-	for _, c := range checks {
-		if c.Status != StatusSkip {
+	for _, t := range tasks {
+		if t.Status != StatusSkip {
 			allSkipped = false
 		}
-		switch c.Status {
+		switch t.Status {
 		case StatusNoGo:
 			hasNoGo = true
 		case StatusWarn:
@@ -375,3 +379,7 @@ func computeStatusFromChecks(checks []Check) Status {
 	}
 	return StatusGo
 }
+
+// Backward compatibility aliases
+// Deprecated: Use TaskResult instead
+type Check = TaskResult

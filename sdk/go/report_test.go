@@ -86,39 +86,39 @@ func TestSortByDAG(t *testing.T) {
 func TestComputeStatus(t *testing.T) {
 	tests := []struct {
 		name     string
-		checks   []Check
+		tasks    []TaskResult
 		expected Status
 	}{
 		{
 			name:     "all GO",
-			checks:   []Check{{Status: StatusGo}, {Status: StatusGo}},
+			tasks:    []TaskResult{{Status: StatusGo}, {Status: StatusGo}},
 			expected: StatusGo,
 		},
 		{
 			name:     "has WARN",
-			checks:   []Check{{Status: StatusGo}, {Status: StatusWarn}},
+			tasks:    []TaskResult{{Status: StatusGo}, {Status: StatusWarn}},
 			expected: StatusWarn,
 		},
 		{
 			name:     "has NO-GO",
-			checks:   []Check{{Status: StatusGo}, {Status: StatusNoGo}},
+			tasks:    []TaskResult{{Status: StatusGo}, {Status: StatusNoGo}},
 			expected: StatusNoGo,
 		},
 		{
 			name:     "all SKIP",
-			checks:   []Check{{Status: StatusSkip}, {Status: StatusSkip}},
+			tasks:    []TaskResult{{Status: StatusSkip}, {Status: StatusSkip}},
 			expected: StatusSkip,
 		},
 		{
 			name:     "NO-GO takes precedence over WARN",
-			checks:   []Check{{Status: StatusWarn}, {Status: StatusNoGo}},
+			tasks:    []TaskResult{{Status: StatusWarn}, {Status: StatusNoGo}},
 			expected: StatusNoGo,
 		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			result := &AgentResult{Checks: tt.checks}
+			result := &AgentResult{Tasks: tt.tasks}
 			if got := result.ComputeStatus(); got != tt.expected {
 				t.Errorf("expected %v, got %v", tt.expected, got)
 			}
@@ -139,20 +139,20 @@ func TestRendererSortsTeams(t *testing.T) {
 				Name:      "release",
 				DependsOn: []string{"qa-validation"},
 				Status:    StatusGo,
-				Checks:    []Check{{ID: "check", Status: StatusGo}},
+				Tasks:     []TaskResult{{ID: "task", Status: StatusGo}},
 			},
 			{
 				ID:        "qa-validation",
 				Name:      "qa",
 				DependsOn: []string{"pm-validation"},
 				Status:    StatusGo,
-				Checks:    []Check{{ID: "check", Status: StatusGo}},
+				Tasks:     []TaskResult{{ID: "task", Status: StatusGo}},
 			},
 			{
 				ID:     "pm-validation",
 				Name:   "pm",
 				Status: StatusGo,
-				Checks: []Check{{ID: "check", Status: StatusGo}},
+				Tasks:  []TaskResult{{ID: "task", Status: StatusGo}},
 			},
 		},
 		Status: StatusGo,

@@ -45,7 +45,7 @@ func templateFuncs() template.FuncMap {
 		"separator":    separator,
 		"footer":       footer,
 		"teamHeader":   teamHeader,
-		"checkLine":    checkLine,
+		"taskLine":     taskLine,
 		"centerLine":   centerLine,
 		"paddedLine":   paddedLine,
 		"finalMessage": finalMessage,
@@ -89,17 +89,17 @@ func teamHeader(team TeamSection) string {
 	return paddedLine(text)
 }
 
-// checkLine formats a single check result line.
-func checkLine(check Check) string {
-	id := check.ID
+// taskLine formats a single task result line.
+func taskLine(task TaskResult) string {
+	id := task.ID
 	if len(id) > 24 {
 		id = id[:21] + "..."
 	}
 
-	icon := check.Status.Icon()
-	statusText := string(check.Status)
+	icon := task.Status.Icon()
+	statusText := string(task.Status)
 
-	detail := check.Detail
+	detail := task.Detail
 	maxDetail := boxWidth - 40
 	if len(detail) > maxDetail {
 		detail = detail[:maxDetail-3] + "..."
@@ -132,6 +132,7 @@ func visualLength(s string) int {
 
 // BoxTemplate is the text/template for the box format report.
 // This is the reference implementation for rendering TeamReport to text.
+// Each task is rendered on its own line with status indicator.
 const BoxTemplate = `{{ header }}
 {{ centerLine "TEAM STATUS REPORT" }}
 {{ separator }}
@@ -142,8 +143,8 @@ const BoxTemplate = `{{ header }}
 {{- range .Teams }}
 {{ separator }}
 {{ teamHeader . }}
-{{- range .Checks }}
-{{ checkLine . }}
+{{- range .Tasks }}
+{{ taskLine . }}
 {{- end }}
 {{- end }}
 {{ separator }}
