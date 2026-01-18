@@ -7,7 +7,7 @@
   "maintainers": ["agentplexus"],
   "releases": [
     {
-      "version": "0.3.0",
+      "version": "v0.3.0",
       "date": "2026-01-17",
       "highlights": [
         { "description": "Add typed ports for workflow data flow, runtime configuration, and support for new platforms (Gemini CLI, ADK Go, CrewAI, AutoGen)" }
@@ -36,7 +36,7 @@
       ]
     },
     {
-      "version": "0.2.0",
+      "version": "v0.2.0",
       "date": "2026-01-17",
       "highlights": [
         { "description": "Rename Check to TaskResult for consistency with multi-agent-spec task terminology" }
@@ -51,7 +51,7 @@
       ]
     },
     {
-      "version": "0.1.2",
+      "version": "v0.1.2",
       "date": "2026-01-17",
       "highlights": [
         { "description": "Add DAG-aware topological sorting for team reports based on step dependencies" }
@@ -63,7 +63,7 @@
       ]
     },
     {
-      "version": "0.1.1",
+      "version": "v0.1.1",
       "date": "2026-01-17",
       "highlights": [
         { "description": "Add team status report IR and renderer for NASA-style Go/No-Go validation reports" }
@@ -83,7 +83,7 @@
       ]
     },
     {
-      "version": "0.1.0",
+      "version": "v0.1.0",
       "date": "2026-01-17",
       "highlights": [
         { "description": "Initial release of Go SDK for multi-agent-spec with type definitions and platform mappings" }
