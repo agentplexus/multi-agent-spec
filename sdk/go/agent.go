@@ -84,31 +84,38 @@ type Task struct {
 // Agent represents an agent definition.
 type Agent struct {
 	// Name is the unique identifier for the agent (lowercase, hyphenated).
-	Name string `json:"name"`
+	Name string `json:"name" yaml:"name"`
+
+	// Namespace is the optional namespace for organizing agents.
+	// Derived from subdirectory path if not explicitly set in frontmatter.
+	Namespace string `json:"namespace,omitempty" yaml:"namespace,omitempty"`
 
 	// Description is a brief summary of what the agent does.
-	Description string `json:"description,omitempty"`
+	Description string `json:"description,omitempty" yaml:"description,omitempty"`
 
 	// Model is the capability tier (haiku, sonnet, opus).
-	Model Model `json:"model,omitempty"`
+	Model Model `json:"model,omitempty" yaml:"model,omitempty"`
 
 	// Tools are the tools available to this agent.
-	Tools []string `json:"tools,omitempty"`
+	Tools []string `json:"tools,omitempty" yaml:"tools,omitempty"`
+
+	// AllowedTools are tools that can execute without user confirmation.
+	AllowedTools []string `json:"allowedTools,omitempty" yaml:"allowedTools,omitempty"`
 
 	// Skills are capabilities the agent can invoke.
-	Skills []string `json:"skills,omitempty"`
+	Skills []string `json:"skills,omitempty" yaml:"skills,omitempty"`
 
 	// Dependencies are other agents this agent depends on.
-	Dependencies []string `json:"dependencies,omitempty"`
+	Dependencies []string `json:"dependencies,omitempty" yaml:"dependencies,omitempty"`
 
 	// Requires lists external tools or binaries required (e.g., go, git).
-	Requires []string `json:"requires,omitempty"`
+	Requires []string `json:"requires,omitempty" yaml:"requires,omitempty"`
 
 	// Instructions is the system prompt for the agent.
-	Instructions string `json:"instructions,omitempty"`
+	Instructions string `json:"instructions,omitempty" yaml:"instructions,omitempty"`
 
 	// Tasks are the tasks this agent can perform.
-	Tasks []Task `json:"tasks,omitempty"`
+	Tasks []Task `json:"tasks,omitempty" yaml:"tasks,omitempty"`
 }
 
 // NewAgent creates a new Agent with the given name and description.
@@ -136,4 +143,36 @@ func (a *Agent) WithTools(tools ...string) *Agent {
 func (a *Agent) WithInstructions(instructions string) *Agent {
 	a.Instructions = instructions
 	return a
+}
+
+// WithNamespace sets the agent's namespace and returns the agent for chaining.
+func (a *Agent) WithNamespace(namespace string) *Agent {
+	a.Namespace = namespace
+	return a
+}
+
+// QualifiedName returns the fully qualified agent name.
+// Returns "namespace/name" if namespace is set, otherwise just "name".
+func (a *Agent) QualifiedName() string {
+	if a.Namespace == "" {
+		return a.Name
+	}
+	return a.Namespace + "/" + a.Name
+}
+
+// ParseQualifiedName splits a qualified agent name into namespace and name parts.
+// Returns empty namespace if no "/" is present.
+//
+// Examples:
+//
+//	ParseQualifiedName("agent-name")        → ("", "agent-name")
+//	ParseQualifiedName("prd/lead")          → ("prd", "lead")
+//	ParseQualifiedName("shared/review")     → ("shared", "review")
+func ParseQualifiedName(qualifiedName string) (namespace, name string) {
+	for i := 0; i < len(qualifiedName); i++ {
+		if qualifiedName[i] == '/' {
+			return qualifiedName[:i], qualifiedName[i+1:]
+		}
+	}
+	return "", qualifiedName
 }
