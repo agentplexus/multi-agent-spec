@@ -70,6 +70,79 @@ team.json
 deployment.json
 ```
 
+## Nested Agent Directories (Optional)
+
+For projects with many agents, you can organize them into subdirectories by namespace:
+
+```
+specs/
+├── agents/
+│   ├── shared/                 # Shared agents (namespace: "shared")
+│   │   ├── review-board.md     # → shared/review-board
+│   │   └── scoring.md          # → shared/scoring
+│   ├── mrd/                    # MRD agents (namespace: "mrd")
+│   │   └── market-sizing.md    # → mrd/market-sizing
+│   ├── prd/                    # PRD agents (namespace: "prd")
+│   │   ├── lead.md             # → prd/lead
+│   │   └── requirements.md     # → prd/requirements
+│   └── orchestrator.md         # Root-level agent (no namespace)
+├── teams/
+│   └── requirements-team.json
+└── deployments/
+    └── requirements-team.json
+```
+
+**Key points:**
+
+- Subdirectory name becomes the agent's namespace automatically
+- Root-level agents have no namespace (fully backward compatible)
+- Team definitions reference agents by qualified name: `"namespace/agent-name"`
+- Explicit `namespace` in frontmatter overrides the directory-derived namespace
+
+### Referencing Namespaced Agents in Teams
+
+```json
+{
+  "name": "requirements-team",
+  "version": "1.0.0",
+  "agents": [
+    "orchestrator",
+    "prd/lead",
+    "prd/requirements",
+    "shared/review-board"
+  ],
+  "orchestrator": "prd/lead",
+  "workflow": {
+    "type": "dag",
+    "steps": [
+      {
+        "name": "discovery",
+        "agent": "prd/lead"
+      },
+      {
+        "name": "review",
+        "agent": "shared/review-board",
+        "depends_on": ["discovery"]
+      }
+    ]
+  }
+}
+```
+
+### Explicit Namespace Override
+
+You can override the directory-derived namespace in the agent's frontmatter:
+
+```markdown
+---
+name: special-agent
+namespace: custom
+description: Agent with explicit namespace
+---
+```
+
+This agent will be referenced as `custom/special-agent` regardless of which subdirectory it resides in.
+
 ## Schemas
 
 ### Agent Definition Schema

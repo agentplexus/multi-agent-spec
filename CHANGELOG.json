@@ -7,6 +7,45 @@
   "maintainers": ["agentplexus"],
   "releases": [
     {
+      "version": "v0.3.0",
+      "date": "2026-01-24",
+      "highlights": [
+        { "description": "Add namespace support for organizing agents into subdirectories" }
+      ],
+      "added": [
+        { "description": "Optional `namespace` field in agent schema for organizing agents" },
+        { "description": "Recursive directory scanning in `LoadAgentsFromDir` - agents in subdirectories get namespace from directory name" },
+        { "description": "`LoadAgentsFromDirFlat` function for non-recursive loading (backward compatibility)" },
+        { "description": "`LoadAgentFromFile`, `LoadTeamFromFile`, `LoadDeploymentFromFile` loader functions in Go SDK" },
+        { "description": "`Namespace` field on Agent struct in Go SDK" },
+        { "description": "`AllowedTools` field on Agent struct in Go SDK" },
+        { "description": "`QualifiedName()` method on Agent to get `namespace/name` format" },
+        { "description": "`ParseQualifiedName()` function to split qualified names" },
+        { "description": "`WithNamespace()` builder method on Agent" },
+        { "description": "YAML struct tags on all Agent fields" },
+        { "description": "Support for `namespace/agent-name` references in team schema (agents, orchestrator, step.agent)" }
+      ],
+      "documentation": [
+        { "description": "README section on nested agent directories with examples" }
+      ]
+    },
+    {
+      "version": "v0.2.0",
+      "date": "2026-01-17",
+      "added": [
+        { "description": "Tasks to agent schema with `id`, `description`, `type`, `command`, `pattern`, `file`, `required`, `expected_output`, `human_in_loop` fields", "commit": "3fd7604" },
+        { "description": "DAG-aware topological sorting for team reports", "commit": "9c999e2" },
+        { "description": "Team status report IR and renderer (NASA-style Go/No-Go validation)", "commit": "579ee6d" }
+      ],
+      "changed": [
+        { "description": "Rename `checks` to `tasks` in report schema for consistency", "commit": "3fd7604" }
+      ],
+      "documentation": [
+        { "description": "specs/ directory structure convention", "commit": "518a2b2" },
+        { "description": "Installation section with Go SDK tagging notes", "commit": "70b7f1e" }
+      ]
+    },
+    {
       "version": "v0.1.0",
       "date": "2026-01-17",
       "highlights": [

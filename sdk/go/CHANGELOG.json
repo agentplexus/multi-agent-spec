@@ -8,6 +8,28 @@
   "maintainers": ["agentplexus"],
   "releases": [
     {
+      "version": "v0.4.0",
+      "date": "2026-01-24",
+      "highlights": [
+        { "description": "Add namespace support, file loaders, and YAML parsing for agent definitions" }
+      ],
+      "added": [
+        { "description": "`Namespace` field on Agent struct for organizing agents into subdirectories" },
+        { "description": "`AllowedTools` field on Agent struct for tools that execute without confirmation" },
+        { "description": "`WithNamespace()` builder method on Agent" },
+        { "description": "`QualifiedName()` method returning `namespace/name` format" },
+        { "description": "`ParseQualifiedName()` function to split qualified agent names" },
+        { "description": "`LoadAgentFromFile()` to load Agent from markdown with YAML frontmatter" },
+        { "description": "`ParseAgentMarkdown()` to parse Agent from markdown bytes" },
+        { "description": "`LoadAgentsFromDir()` with recursive scanning and namespace derivation from subdirectory" },
+        { "description": "`LoadAgentsFromDirFlat()` for non-recursive loading (backward compatibility)" },
+        { "description": "`LoadTeamFromFile()` to load Team from JSON" },
+        { "description": "`LoadDeploymentFromFile()` to load Deployment from JSON" },
+        { "description": "YAML struct tags on all Agent fields" },
+        { "description": "`gopkg.in/yaml.v3` dependency for frontmatter parsing" }
+      ]
+    },
+    {
       "version": "v0.3.0",
       "date": "2026-01-17",
       "highlights": [
