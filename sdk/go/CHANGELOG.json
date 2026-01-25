@@ -8,6 +8,37 @@
   "maintainers": ["agentplexus"],
   "releases": [
     {
+      "version": "v0.5.0",
+      "date": "2026-01-25",
+      "highlights": [
+        { "description": "Replace Target.Config with typed platform config fields (breaking change)" },
+        { "description": "Add codegen support with JSONSchema() methods on enum types" }
+      ],
+      "added": [
+        { "description": "JSONSchema() methods on Model, Tool, TaskType, WorkflowType, Platform, Priority, DeploymentMode, PortType, Status for proper JSON Schema generation", "commit": "3efe29e" },
+        { "description": "Typed platform config fields on Target: ClaudeCode, GeminiCLI, KiroCLI, ADKGo, CrewAI, AutoGen, AWSAgentCore, Kubernetes, DockerCompose, AgentKitLocal", "commit": "57cc235" },
+        { "description": "New platform constants: PlatformGeminiCLI, PlatformADKGo, PlatformCrewAI, PlatformAutoGen", "commit": "57cc235" },
+        { "description": "New config types: GeminiCLIConfig, ADKGoConfig, CrewAIConfig, AutoGenConfig, CodeExecutionConfig", "commit": "57cc235" },
+        { "description": "Tests for all new platform configs", "commit": "57cc235" }
+      ],
+      "changed": [
+        { "description": "**Breaking**: `Target.Config json.RawMessage` replaced with typed config fields - use `target.ClaudeCode = &ClaudeCodeConfig{...}` instead of `target.Config = json.Marshal(...)`", "commit": "57cc235" }
+      ],
+      "removed": [
+        { "description": "`Target.Config` field (use typed config fields instead)", "commit": "57cc235" }
+      ]
+    },
+    {
+      "version": "v0.4.1",
+      "date": "2026-01-24",
+      "fixed": [
+        { "description": "Report table alignment - update boxWidth from 76 to 78 for proper 80-character terminal width", "commit": "d63e76a" }
+      ],
+      "added": [
+        { "description": "Icon field on Agent struct", "commit": "9e6fd52" }
+      ]
+    },
+    {
       "version": "v0.4.0",
       "date": "2026-01-24",
       "highlights": [

@@ -7,6 +7,39 @@
   "maintainers": ["agentplexus"],
   "releases": [
     {
+      "version": "v0.4.0",
+      "date": "2026-01-25",
+      "highlights": [
+        { "description": "Schema codegen pipeline: Go types are now the source of truth" },
+        { "description": "New deployment platforms: Gemini CLI, ADK Go, CrewAI, AutoGen" },
+        { "description": "TypeScript SDK auto-generated from JSON Schema" }
+      ],
+      "added": [
+        { "description": "Codegen pipeline: Go → JSON Schema → TypeScript/Zod", "commit": "3efe29e" },
+        { "description": "`tools/generate/` - Go schema generator using invopop/jsonschema", "commit": "3efe29e" },
+        { "description": "`sdk/typescript/scripts/generate-schemas.mjs` - TypeScript/Zod generator", "commit": "3efe29e" },
+        { "description": "`Makefile` - Orchestrates full codegen pipeline", "commit": "3efe29e" },
+        { "description": "New platforms: GeminiCLI, ADKGo, CrewAI, AutoGen with typed configs", "commit": "57cc235" },
+        { "description": "RuntimeConfig, StepRuntime, RetryPolicy, ObservabilityConfig for deployment targets", "commit": "57cc235" },
+        { "description": "Go SDK: JSONSchema() methods on enum types for proper schema generation", "commit": "3efe29e" },
+        { "description": "Go SDK: Typed platform config fields on Target", "commit": "57cc235" },
+        { "description": "Icon field in agent schema", "commit": "9e6fd52" }
+      ],
+      "changed": [
+        { "description": "**Breaking (Go SDK)**: `Target.Config json.RawMessage` replaced with typed config fields", "commit": "57cc235" },
+        { "description": "TypeScript SDK now auto-generated from JSON Schema", "commit": "3efe29e" },
+        { "description": "JSON Schemas regenerated with proper enum values and descriptions", "commit": "3efe29e" }
+      ],
+      "removed": [
+        { "description": "Go SDK: `Target.Config` field (use typed config fields instead)", "commit": "57cc235" },
+        { "description": "TypeScript SDK: Manual `schemas.ts` (replaced by generated schemas)", "commit": "3efe29e" }
+      ],
+      "fixed": [
+        { "description": "Report table alignment (boxWidth 76→78)", "commit": "d63e76a" },
+        { "description": "Python SDK missing `__init__.py` files", "commit": "8416872" }
+      ]
+    },
+    {
       "version": "v0.3.0",
       "date": "2026-01-24",
       "highlights": [
