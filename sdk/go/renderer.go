@@ -9,7 +9,7 @@ import (
 
 const (
 	// boxWidth is the inner width of the box (between the border characters).
-	boxWidth = 76
+	boxWidth = 78
 )
 
 // Renderer renders TeamReport to various formats.
