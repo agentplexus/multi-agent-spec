@@ -1,7 +1,5 @@
 package multiagentspec
 
-import "encoding/json"
-
 // Platform represents supported deployment platforms.
 type Platform string
 
@@ -60,8 +58,17 @@ type Target struct {
 	// Runtime is the runtime configuration for workflow execution.
 	Runtime *RuntimeConfig `json:"runtime,omitempty"`
 
-	// Config is platform-specific configuration.
-	Config json.RawMessage `json:"config,omitempty"`
+	// Platform-specific configurations (use the one matching Platform field)
+	ClaudeCode    *ClaudeCodeConfig    `json:"claudeCode,omitempty"`
+	GeminiCLI     *GeminiCLIConfig     `json:"geminiCli,omitempty"`
+	KiroCLI       *KiroCLIConfig       `json:"kiroCli,omitempty"`
+	ADKGo         *ADKGoConfig         `json:"adkGo,omitempty"`
+	CrewAI        *CrewAIConfig        `json:"crewai,omitempty"`
+	AutoGen       *AutoGenConfig       `json:"autogen,omitempty"`
+	AWSAgentCore  *AWSAgentCoreConfig  `json:"awsAgentCore,omitempty"`
+	Kubernetes    *KubernetesConfig    `json:"kubernetes,omitempty"`
+	DockerCompose *DockerComposeConfig `json:"dockerCompose,omitempty"`
+	AgentKitLocal *AgentKitLocalConfig `json:"agentKitLocal,omitempty"`
 }
 
 // RuntimeConfig holds runtime configuration for workflow execution.

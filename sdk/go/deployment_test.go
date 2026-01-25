@@ -46,17 +46,15 @@ func TestPriorityConstants(t *testing.T) {
 }
 
 func TestTargetSerialization(t *testing.T) {
-	configData, _ := json.Marshal(ClaudeCodeConfig{
-		AgentDir: ".claude/agents",
-		Format:   "markdown",
-	})
-
 	target := Target{
 		Name:     "local-claude",
 		Platform: PlatformClaudeCode,
 		Priority: PriorityP1,
 		Output:   ".claude/agents",
-		Config:   configData,
+		ClaudeCode: &ClaudeCodeConfig{
+			AgentDir: ".claude/agents",
+			Format:   "markdown",
+		},
 	}
 
 	data, err := json.Marshal(target)
@@ -319,5 +317,159 @@ func TestAgentKitLocalConfigOmitPort(t *testing.T) {
 
 	if _, ok := m["port"]; ok {
 		t.Error("port should be omitted when zero")
+	}
+}
+
+func TestNewPlatformConstants(t *testing.T) {
+	tests := []struct {
+		platform Platform
+		want     string
+	}{
+		{PlatformGeminiCLI, "gemini-cli"},
+		{PlatformADKGo, "adk-go"},
+		{PlatformCrewAI, "crewai"},
+		{PlatformAutoGen, "autogen"},
+	}
+
+	for _, tt := range tests {
+		if string(tt.platform) != tt.want {
+			t.Errorf("Platform %v = %q, want %q", tt.platform, string(tt.platform), tt.want)
+		}
+	}
+}
+
+func TestGeminiCLIConfig(t *testing.T) {
+	config := GeminiCLIConfig{
+		Model:     "gemini-2.0-flash",
+		ConfigDir: ".gemini",
+	}
+
+	data, err := json.Marshal(config)
+	if err != nil {
+		t.Fatalf("json.Marshal failed: %v", err)
+	}
+
+	var decoded GeminiCLIConfig
+	if err := json.Unmarshal(data, &decoded); err != nil {
+		t.Fatalf("json.Unmarshal failed: %v", err)
+	}
+
+	if decoded.Model != config.Model {
+		t.Errorf("Model = %q, want %q", decoded.Model, config.Model)
+	}
+	if decoded.ConfigDir != config.ConfigDir {
+		t.Errorf("ConfigDir = %q, want %q", decoded.ConfigDir, config.ConfigDir)
+	}
+}
+
+func TestADKGoConfig(t *testing.T) {
+	config := ADKGoConfig{
+		Model:        "gemini-2.0-flash",
+		ServerPort:   8080,
+		SessionStore: "memory",
+		ToolRegistry: "local",
+	}
+
+	data, err := json.Marshal(config)
+	if err != nil {
+		t.Fatalf("json.Marshal failed: %v", err)
+	}
+
+	var decoded ADKGoConfig
+	if err := json.Unmarshal(data, &decoded); err != nil {
+		t.Fatalf("json.Unmarshal failed: %v", err)
+	}
+
+	if decoded.Model != config.Model {
+		t.Errorf("Model = %q, want %q", decoded.Model, config.Model)
+	}
+	if decoded.ServerPort != config.ServerPort {
+		t.Errorf("ServerPort = %d, want %d", decoded.ServerPort, config.ServerPort)
+	}
+}
+
+func TestCrewAIConfig(t *testing.T) {
+	config := CrewAIConfig{
+		Model:         "gpt-4",
+		Verbose:       true,
+		Memory:        true,
+		ProcessType:   "sequential",
+		MaxIterations: 10,
+	}
+
+	data, err := json.Marshal(config)
+	if err != nil {
+		t.Fatalf("json.Marshal failed: %v", err)
+	}
+
+	var decoded CrewAIConfig
+	if err := json.Unmarshal(data, &decoded); err != nil {
+		t.Fatalf("json.Unmarshal failed: %v", err)
+	}
+
+	if decoded.Model != config.Model {
+		t.Errorf("Model = %q, want %q", decoded.Model, config.Model)
+	}
+	if decoded.Verbose != config.Verbose {
+		t.Errorf("Verbose = %v, want %v", decoded.Verbose, config.Verbose)
+	}
+}
+
+func TestAutoGenConfig(t *testing.T) {
+	config := AutoGenConfig{
+		Model:                   "gpt-4",
+		HumanInputMode:          "NEVER",
+		MaxConsecutiveAutoReply: 5,
+		CodeExecutionConfig: &CodeExecutionConfig{
+			WorkDir:   "/tmp/autogen",
+			UseDocker: true,
+		},
+	}
+
+	data, err := json.Marshal(config)
+	if err != nil {
+		t.Fatalf("json.Marshal failed: %v", err)
+	}
+
+	var decoded AutoGenConfig
+	if err := json.Unmarshal(data, &decoded); err != nil {
+		t.Fatalf("json.Unmarshal failed: %v", err)
+	}
+
+	if decoded.Model != config.Model {
+		t.Errorf("Model = %q, want %q", decoded.Model, config.Model)
+	}
+	if decoded.CodeExecutionConfig == nil {
+		t.Error("CodeExecutionConfig should not be nil")
+	} else {
+		if decoded.CodeExecutionConfig.UseDocker != true {
+			t.Errorf("UseDocker = %v, want true", decoded.CodeExecutionConfig.UseDocker)
+		}
+	}
+}
+
+func TestTargetWithTypedConfigs(t *testing.T) {
+	target := Target{
+		Name:     "gemini-target",
+		Platform: PlatformGeminiCLI,
+		GeminiCLI: &GeminiCLIConfig{
+			Model: "gemini-2.0-flash",
+		},
+	}
+
+	data, err := json.Marshal(target)
+	if err != nil {
+		t.Fatalf("json.Marshal failed: %v", err)
+	}
+
+	var decoded Target
+	if err := json.Unmarshal(data, &decoded); err != nil {
+		t.Fatalf("json.Unmarshal failed: %v", err)
+	}
+
+	if decoded.GeminiCLI == nil {
+		t.Error("GeminiCLI config should not be nil")
+	} else if decoded.GeminiCLI.Model != "gemini-2.0-flash" {
+		t.Errorf("GeminiCLI.Model = %q, want %q", decoded.GeminiCLI.Model, "gemini-2.0-flash")
 	}
 }
