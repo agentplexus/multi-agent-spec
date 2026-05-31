@@ -41,7 +41,7 @@ func TestGenerateSkillSchema(t *testing.T) {
 		t.Fatalf("creating directory: %v", err)
 	}
 
-	if err := os.WriteFile(outputPath, data, 0644); err != nil {
+	if err := os.WriteFile(outputPath, data, 0600); err != nil {
 		t.Fatalf("writing schema: %v", err)
 	}
 

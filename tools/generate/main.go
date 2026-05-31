@@ -102,7 +102,7 @@ func generateSchema(v interface{}, outputPath, title, description, id string) er
 	}
 
 	// Write file
-	if err := os.WriteFile(outputPath, data, 0o644); err != nil {
+	if err := os.WriteFile(outputPath, data, 0600); err != nil {
 		return fmt.Errorf("writing file %s: %w", outputPath, err)
 	}
 
