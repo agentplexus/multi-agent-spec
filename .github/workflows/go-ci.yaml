@@ -7,19 +7,21 @@ on:
       - main
     paths:
       - '**.go'
-      - 'go.mod'
-      - 'go.sum'
+      - '**/go.mod'
+      - '**/go.sum'
       - '.github/workflows/go-ci.yaml'
   pull_request:
     branches:
       - main
     paths:
       - '**.go'
-      - 'go.mod'
-      - 'go.sum'
+      - '**/go.mod'
+      - '**/go.sum'
       - '.github/workflows/go-ci.yaml'
   workflow_dispatch:
 
 jobs:
   ci:
     uses: plexusone/.github/.github/workflows/go-ci.yaml@main
+    with:
+      modules: '["sdk/go", "cmd/mas", "tools/generate"]'

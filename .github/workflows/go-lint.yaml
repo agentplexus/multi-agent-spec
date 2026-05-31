@@ -7,8 +7,8 @@ on:
       - main
     paths:
       - '**.go'
-      - 'go.mod'
-      - 'go.sum'
+      - '**/go.mod'
+      - '**/go.sum'
       - '.golangci.yml'
       - '.github/workflows/go-lint.yaml'
   pull_request:
@@ -16,8 +16,8 @@ on:
       - main
     paths:
       - '**.go'
-      - 'go.mod'
-      - 'go.sum'
+      - '**/go.mod'
+      - '**/go.sum'
       - '.golangci.yml'
       - '.github/workflows/go-lint.yaml'
   workflow_dispatch:
@@ -25,3 +25,5 @@ on:
 jobs:
   lint:
     uses: plexusone/.github/.github/workflows/go-lint.yaml@main
+    with:
+      modules: '["sdk/go", "cmd/mas", "tools/generate"]'
