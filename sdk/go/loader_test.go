@@ -460,6 +460,220 @@ func TestNewLoader(t *testing.T) {
 	}
 }
 
+func TestParseSkillMarkdown(t *testing.T) {
+	input := `---
+name: version-analysis
+description: Analyze git history for semantic versioning
+model: haiku
+triggers: [version, semver, changelog]
+dependencies: [git]
+tools: [Bash, Read]
+scripts:
+  - scripts/analyze.sh
+references:
+  - docs/semver.md
+---
+
+# Version Analysis
+
+Analyze the git commit history to determine the next semantic version.
+
+## Instructions
+
+1. Look at commits since the last tag
+2. Classify each commit type
+3. Determine major/minor/patch bump
+`
+
+	skill, err := ParseSkillMarkdown([]byte(input))
+	if err != nil {
+		t.Fatalf("ParseSkillMarkdown failed: %v", err)
+	}
+
+	if skill.Name != "version-analysis" {
+		t.Errorf("Name = %q, want %q", skill.Name, "version-analysis")
+	}
+
+	if skill.Description != "Analyze git history for semantic versioning" {
+		t.Errorf("Description = %q, want %q", skill.Description, "Analyze git history for semantic versioning")
+	}
+
+	if skill.Model != ModelHaiku {
+		t.Errorf("Model = %q, want %q", skill.Model, ModelHaiku)
+	}
+
+	if len(skill.Triggers) != 3 {
+		t.Errorf("Triggers count = %d, want 3", len(skill.Triggers))
+	}
+
+	if len(skill.Dependencies) != 1 {
+		t.Errorf("Dependencies count = %d, want 1", len(skill.Dependencies))
+	}
+
+	if len(skill.Tools) != 2 {
+		t.Errorf("Tools count = %d, want 2", len(skill.Tools))
+	}
+
+	if len(skill.Scripts) != 1 {
+		t.Errorf("Scripts count = %d, want 1", len(skill.Scripts))
+	}
+
+	if len(skill.References) != 1 {
+		t.Errorf("References count = %d, want 1", len(skill.References))
+	}
+
+	if skill.Instructions == "" {
+		t.Error("Instructions should not be empty")
+	}
+}
+
+func TestLoadSkillsFromDir(t *testing.T) {
+	tmpDir := t.TempDir()
+
+	// Create skill directory structure
+	skill1Dir := filepath.Join(tmpDir, "version-analysis")
+	skill2Dir := filepath.Join(tmpDir, "commit-classification")
+	if err := os.MkdirAll(skill1Dir, 0755); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.MkdirAll(skill2Dir, 0755); err != nil {
+		t.Fatal(err)
+	}
+
+	skill1 := `---
+name: version-analysis
+description: Analyze versions
+triggers: [version]
+---
+
+Version analysis instructions.
+`
+
+	skill2 := `---
+name: commit-classification
+description: Classify commits
+triggers: [commit, classify]
+---
+
+Commit classification instructions.
+`
+
+	if err := os.WriteFile(filepath.Join(skill1Dir, "SKILL.md"), []byte(skill1), 0600); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(skill2Dir, "SKILL.md"), []byte(skill2), 0600); err != nil {
+		t.Fatal(err)
+	}
+
+	// Add a nested directory that should be ignored
+	scriptsDir := filepath.Join(skill1Dir, "scripts")
+	if err := os.MkdirAll(scriptsDir, 0755); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(scriptsDir, "helper.md"), []byte("ignore me"), 0600); err != nil {
+		t.Fatal(err)
+	}
+
+	skills, err := LoadSkillsFromDir(tmpDir)
+	if err != nil {
+		t.Fatalf("LoadSkillsFromDir failed: %v", err)
+	}
+
+	if len(skills) != 2 {
+		t.Errorf("Skill count = %d, want 2", len(skills))
+	}
+
+	names := make(map[string]bool)
+	for _, s := range skills {
+		names[s.Name] = true
+	}
+
+	if !names["version-analysis"] {
+		t.Error("version-analysis not found")
+	}
+	if !names["commit-classification"] {
+		t.Error("commit-classification not found")
+	}
+}
+
+func TestLoadSkillSetFromDir(t *testing.T) {
+	tmpDir := t.TempDir()
+
+	skill1Dir := filepath.Join(tmpDir, "skill-a")
+	skill2Dir := filepath.Join(tmpDir, "skill-b")
+	if err := os.MkdirAll(skill1Dir, 0755); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.MkdirAll(skill2Dir, 0755); err != nil {
+		t.Fatal(err)
+	}
+
+	skill1 := `---
+name: skill-a
+triggers: [alpha]
+---
+Instructions A.
+`
+	skill2 := `---
+name: skill-b
+triggers: [beta, alpha]
+---
+Instructions B.
+`
+
+	if err := os.WriteFile(filepath.Join(skill1Dir, "SKILL.md"), []byte(skill1), 0600); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(skill2Dir, "SKILL.md"), []byte(skill2), 0600); err != nil {
+		t.Fatal(err)
+	}
+
+	ss, err := LoadSkillSetFromDir(tmpDir)
+	if err != nil {
+		t.Fatalf("LoadSkillSetFromDir failed: %v", err)
+	}
+
+	if ss.Get("skill-a") == nil {
+		t.Error("skill-a not found in SkillSet")
+	}
+	if ss.Get("skill-b") == nil {
+		t.Error("skill-b not found in SkillSet")
+	}
+
+	// Test FindByTrigger
+	alphaSkills := ss.FindByTrigger("alpha")
+	if len(alphaSkills) != 2 {
+		t.Errorf("FindByTrigger('alpha') count = %d, want 2", len(alphaSkills))
+	}
+}
+
+func TestLoader_LoadSkill(t *testing.T) {
+	tmpDir := t.TempDir()
+
+	skillMD := `---
+name: test-skill
+description: A test skill
+---
+
+Test instructions.
+`
+
+	path := filepath.Join(tmpDir, "SKILL.md")
+	if err := os.WriteFile(path, []byte(skillMD), 0600); err != nil {
+		t.Fatal(err)
+	}
+
+	loader := NewLoader()
+	skill, err := loader.LoadSkill(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if skill.Name != "test-skill" {
+		t.Errorf("Name = %q, want %q", skill.Name, "test-skill")
+	}
+}
+
 func TestLoader_LoadTeam(t *testing.T) {
 	tmpDir := t.TempDir()
 
