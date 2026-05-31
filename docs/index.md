@@ -110,3 +110,7 @@ Deploy to multiple platforms:
 - [Schemas](schemas/overview.md) — JSON Schema reference
 - [CLI](cli/mas.md) — Command-line interface
 - [SDK](sdk/go.md) — Go SDK reference
+
+## Guides
+
+- [GitHub PR Review](guides/github-pr-review.md) — Review PRs with Claude Code and post comments
