@@ -19,3 +19,6 @@ sdk/typescript/dist/
 
 # CLI binary
 cmd/mas/mas
+
+# MkDocs build output
+site/
