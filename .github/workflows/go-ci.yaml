@@ -23,5 +23,3 @@ on:
 jobs:
   ci:
     uses: plexusone/.github/.github/workflows/go-ci.yaml@main
-    with:
-      modules: '["sdk/go", "cmd/mas", "tools/generate"]'

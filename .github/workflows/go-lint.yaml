@@ -25,5 +25,3 @@ on:
 jobs:
   lint:
     uses: plexusone/.github/.github/workflows/go-lint.yaml@main
-    with:
-      modules: '["sdk/go", "cmd/mas", "tools/generate"]'

@@ -27,5 +27,3 @@ on:
 jobs:
   sast:
     uses: plexusone/.github/.github/workflows/go-sast-codeql.yaml@main
-    with:
-      modules: '["sdk/go", "cmd/mas", "tools/generate"]'
