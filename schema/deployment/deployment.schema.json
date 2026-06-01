@@ -87,21 +87,13 @@
           "type": "string"
         },
         "team_mode": {
-          "type": "string",
-          "enum": ["subagent", "team"],
-          "default": "subagent",
-          "description": "Whether to use subagents or agent teams"
+          "type": "string"
         },
         "teammate_mode": {
-          "type": "string",
-          "enum": ["in-process", "tmux", "auto"],
-          "default": "auto",
-          "description": "Display mode for agent teams"
+          "type": "string"
         },
         "enable_teams": {
-          "type": "boolean",
-          "default": false,
-          "description": "Set CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1"
+          "type": "boolean"
         }
       },
       "additionalProperties": false,
@@ -141,13 +133,10 @@
           "type": "integer"
         },
         "allowDelegation": {
-          "type": "boolean",
-          "default": true,
-          "description": "Enable agent delegation in CrewAI"
+          "type": "boolean"
         },
         "managerLlm": {
-          "type": "string",
-          "description": "Model for manager agent in hierarchical process"
+          "type": "string"
         }
       },
       "additionalProperties": false,
@@ -215,8 +204,7 @@
           "type": "string"
         },
         "prefix": {
-          "type": "string",
-          "description": "Prefix applied to agent names, filenames, and steering files for namespace isolation"
+          "type": "string"
         }
       },
       "additionalProperties": false,
