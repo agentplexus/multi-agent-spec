@@ -19,6 +19,9 @@
         { "description": "SkillSet collection with `FindByTrigger` for keyword-based skill lookup", "commit": "114831b" },
         { "description": "Skill loading functions: `LoadSkillFromFile`, `LoadSkillsFromDir`, `LoadSkillSetFromDir`", "commit": "46c14aa" },
         { "description": "Skill JSON schema (`schema/skill/skill.schema.json`)", "commit": "e730b4e" },
+        { "description": "Skill added to schema generator pipeline", "commit": "1b124c0" },
+        { "description": "TypeScript SDK: Skill Zod schema and type", "commit": "179b4e6" },
+        { "description": "Python SDK: Skill Pydantic model and generation script", "commit": "fe7a15f" },
         { "description": "PlexusOne unified navigation bar and theme integration", "commit": "f5de99b" }
       ],
       "changed": [
@@ -28,7 +31,9 @@
       ],
       "documentation": [
         { "description": "Skill schema reference documentation (`docs/schemas/skill.md`)", "commit": "c0e5963" },
-        { "description": "GitHub PR review guide for Claude Code (`docs/guides/github-pr-review.md`)", "commit": "8f1debc" }
+        { "description": "GitHub PR review guide for Claude Code (`docs/guides/github-pr-review.md`)", "commit": "8f1debc" },
+        { "description": "CLAUDE.md with project instructions and workflows", "commit": "671b378" },
+        { "description": "SDK generation workflow documentation", "commit": "e4fd35c" }
       ],
       "fixed": [
         { "description": "golangci-lint `os.WriteFile` file mode warnings", "commit": "aac894a" }
