@@ -6,3 +6,4 @@
 export * from './agent.js';
 export * from './team.js';
 export * from './deployment.js';
+export * from './skill.js';

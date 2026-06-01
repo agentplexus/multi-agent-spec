@@ -21,6 +21,7 @@ const SCHEMAS = [
   { file: 'agent/agent.schema.json', name: 'Agent' },
   { file: 'orchestration/team.schema.json', name: 'Team' },
   { file: 'deployment/deployment.schema.json', name: 'Deployment' },
+  { file: 'skill/skill.schema.json', name: 'Skill' },
 ];
 
 /**
