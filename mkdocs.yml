@@ -54,13 +54,17 @@ nav:
       - Team: schemas/team.md
       - Deployment: schemas/deployment.md
       - Report: schemas/report.md
+      - Skill: schemas/skill.md
   - CLI:
       - mas: cli/mas.md
   - SDK:
       - Go: sdk/go.md
   - Examples:
       - Stats Agent Team: examples/stats-agent-team.md
+  - Guides:
+      - GitHub PR Review: guides/github-pr-review.md
   - Releases:
+      - v0.8.0: releases/v0.8.0.md
       - v0.7.0: releases/v0.7.0.md
       - v0.6.0: releases/v0.6.0.md
       - v0.5.0: releases/v0.5.0.md

@@ -10,6 +10,7 @@ Multi-Agent Spec uses JSON Schema (draft 2020-12) for all definitions. This enab
 | [Team](team.md) | Multi-agent workflows | `orchestration/team.schema.json` |
 | [Deployment](deployment.md) | Platform-specific configs | `deployment/deployment.schema.json` |
 | [Report](report.md) | Execution results | `report/team-report.schema.json` |
+| [Skill](skill.md) | Reusable agent capabilities | `skill/skill.schema.json` |
 | Message | Inter-agent messaging | `message/message.schema.json` |
 
 ## Workflow Categories
@@ -36,6 +37,7 @@ https://raw.githubusercontent.com/plexusone/multi-agent-spec/main/schema/{catego
 | Agent | `.../schema/agent/agent.schema.json` |
 | Team | `.../schema/orchestration/team.schema.json` |
 | Deployment | `.../schema/deployment/deployment.schema.json` |
+| Skill | `.../schema/skill/skill.schema.json` |
 | Message | `.../schema/message/message.schema.json` |
 
 ## Using Schemas
