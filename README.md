@@ -187,7 +187,29 @@ Defines target platforms and configurations.
 
 - **Schema**: [`schema/deployment/deployment.schema.json`](schema/deployment/deployment.schema.json)
 
-### Message Schema (v0.8.0+)
+### Skill Schema (v0.8.0+)
+
+Defines reusable capabilities that agents can invoke.
+
+- **Schema**: [`schema/skill/skill.schema.json`](schema/skill/skill.schema.json)
+- **Format**: Markdown with YAML front matter
+
+```markdown
+---
+name: version-analysis
+description: Analyze git history for semantic versioning
+model: haiku
+triggers: [version, semver]
+dependencies: [git]
+tools: [Bash, Read]
+---
+
+# Version Analysis
+
+Analyze the git commit history to determine the next semantic version.
+```
+
+### Message Schema (v0.6.0+)
 
 Defines inter-agent messages for self-directed workflows.
 
