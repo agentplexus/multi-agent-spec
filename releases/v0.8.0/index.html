@@ -999,6 +999,24 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#typescript-sdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      TypeScript SDK
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-sdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python SDK
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#plexusone-navigation" class="md-nav__link">
     <span class="md-ellipsis">
       PlexusOne Navigation
@@ -1337,6 +1355,24 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#typescript-sdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      TypeScript SDK
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-sdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python SDK
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#plexusone-navigation" class="md-nav__link">
     <span class="md-ellipsis">
       PlexusOne Navigation
@@ -1508,13 +1544,35 @@
 <a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>Analyze the git commit history to determine the next semantic version.
 </code></pre></div>
+<h3 id="typescript-sdk">TypeScript SDK<a class="headerlink" href="#typescript-sdk" title="Permanent link">&para;</a></h3>
+<p>Skill type now available in the TypeScript SDK with Zod schema validation:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">SkillSchema</span><span class="p">,</span><span class="w"> </span><span class="nx">Skill</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@plexusone/multi-agent-spec&#39;</span><span class="p">;</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kd">const</span><span class="w"> </span><span class="nx">skill</span><span class="o">:</span><span class="w"> </span><span class="kt">Skill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">SkillSchema</span><span class="p">.</span><span class="nx">parse</span><span class="p">({</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;version-analysis&#39;</span><span class="p">,</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nx">description</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Analyze git history&#39;</span><span class="p">,</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="nx">model</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;haiku&#39;</span><span class="p">,</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span><span class="nx">triggers</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;version&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;semver&#39;</span><span class="p">],</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="p">});</span>
+</code></pre></div>
+<h3 id="python-sdk">Python SDK<a class="headerlink" href="#python-sdk" title="Permanent link">&para;</a></h3>
+<p>Skill type now available in the Python SDK with Pydantic validation:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">multi_agent_spec</span><span class="w"> </span><span class="kn">import</span> <span class="n">Skill</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">skill</span> <span class="o">=</span> <span class="n">Skill</span><span class="p">(</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;version-analysis&#39;</span><span class="p">,</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Analyze git history&#39;</span><span class="p">,</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="n">model</span><span class="o">=</span><span class="s1">&#39;haiku&#39;</span><span class="p">,</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="n">triggers</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;version&#39;</span><span class="p">,</span> <span class="s1">&#39;semver&#39;</span><span class="p">],</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="p">)</span>
+</code></pre></div>
 <h3 id="plexusone-navigation">PlexusOne Navigation<a class="headerlink" href="#plexusone-navigation" title="Permanent link">&para;</a></h3>
 <p>Integrated PlexusOne design system with CDN-hosted CSS and unified navigation bar.</p>
 <h2 id="changed">Changed<a class="headerlink" href="#changed" title="Permanent link">&para;</a></h2>
 <h3 id="go-module-consolidation">Go Module Consolidation<a class="headerlink" href="#go-module-consolidation" title="Permanent link">&para;</a></h3>
 <p>The repository now uses a single top-level Go module instead of separate modules for <code>sdk/go</code>, <code>cmd/mas</code>, and <code>tools/generate</code>.</p>
 <p><strong>Import paths remain unchanged</strong> - continue using:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span><span class="w"> </span><span class="nx">multiagentspec</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/multi-agent-spec/sdk/go&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">import</span><span class="w"> </span><span class="nx">multiagentspec</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/multi-agent-spec/sdk/go&quot;</span>
 </code></pre></div>
 <p>Benefits:</p>
 <ul>
@@ -1526,6 +1584,7 @@
 <ul>
 <li><strong>Skill Schema Reference</strong>: Complete documentation at <code>docs/schemas/skill.md</code></li>
 <li><strong>GitHub PR Review Guide</strong>: How to review PRs with Claude Code at <code>docs/guides/github-pr-review.md</code></li>
+<li><strong>CLAUDE.md</strong>: Project-specific instructions for Claude Code including schema generation workflow, release process, and commit conventions</li>
 </ul>
 <h2 id="fixed">Fixed<a class="headerlink" href="#fixed" title="Permanent link">&para;</a></h2>
 <ul>
@@ -1533,14 +1592,14 @@
 </ul>
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
 <h3 id="go">Go<a class="headerlink" href="#go" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>go<span class="w"> </span>get<span class="w"> </span>github.com/plexusone/multi-agent-spec@v0.8.0
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>go<span class="w"> </span>get<span class="w"> </span>github.com/plexusone/multi-agent-spec@v0.8.0
 </code></pre></div>
 <p>Note: The SDK package path is still <code>github.com/plexusone/multi-agent-spec/sdk/go</code>.</p>
 <h3 id="typescript">TypeScript<a class="headerlink" href="#typescript" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>npm<span class="w"> </span>install<span class="w"> </span>@plexusone/multi-agent-spec
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>npm<span class="w"> </span>install<span class="w"> </span>@plexusone/multi-agent-spec
 </code></pre></div>
 <h3 id="python">Python<a class="headerlink" href="#python" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>pip<span class="w"> </span>install<span class="w"> </span>multi-agent-spec
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>pip<span class="w"> </span>install<span class="w"> </span>multi-agent-spec
 </code></pre></div>
 <h2 id="full-changelog">Full Changelog<a class="headerlink" href="#full-changelog" title="Permanent link">&para;</a></h2>
 <p>See <a href="https://github.com/plexusone/multi-agent-spec/blob/main/CHANGELOG.md">CHANGELOG.md</a> for the complete list of changes.</p>
