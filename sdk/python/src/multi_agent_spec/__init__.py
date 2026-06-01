@@ -30,6 +30,8 @@ from multi_agent_spec.models import (
     Priority,
     Tool,
     WorkflowType,
+    # Skill models
+    Skill,
     # Agent models
     Agent,
     # Team/Orchestration models
@@ -61,6 +63,8 @@ __all__ = [
     "WorkflowType",
     "Platform",
     "Priority",
+    # Skill models
+    "Skill",
     # Agent models
     "Agent",
     # Team/Orchestration models

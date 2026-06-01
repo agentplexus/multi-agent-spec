@@ -43,7 +43,11 @@ dev = [
     "pytest-cov>=4.0.0",
     "ruff>=0.4.0",
     "mypy>=1.10.0",
+    "datamodel-code-generator>=0.25.0",
 ]
+
+[project.scripts]
+generate-schemas = "multi_agent_spec.scripts.generate:main"
 
 [project.urls]
 Homepage = "https://github.com/plexusone/multi-agent-spec"

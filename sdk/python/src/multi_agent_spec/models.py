@@ -86,6 +86,50 @@ class Priority(str, Enum):
 # =============================================================================
 
 
+class Skill(BaseModel):
+    """Skill definition model - reusable capability that agents can invoke."""
+
+    name: str = Field(
+        ...,
+        description="Unique identifier for the skill (lowercase, hyphenated)",
+    )
+    description: str | None = Field(
+        default=None, description="Brief description of what the skill does"
+    )
+    instructions: str | None = Field(
+        default=None, description="Main prompt/instructions for the skill"
+    )
+    model: Model | None = Field(
+        default=None,
+        description="Recommended model tier for this skill",
+    )
+    tools: list[str] = Field(
+        default_factory=list, description="Tools this skill requires access to"
+    )
+    scripts: list[str] = Field(
+        default_factory=list,
+        description="Paths to executable scripts relative to skill directory",
+    )
+    references: list[str] = Field(
+        default_factory=list,
+        description="Paths to reference documentation",
+    )
+    assets: list[str] = Field(
+        default_factory=list,
+        description="Paths to templates, config files, or other resources",
+    )
+    triggers: list[str] = Field(
+        default_factory=list,
+        description="Keywords or patterns that invoke this skill",
+    )
+    dependencies: list[str] = Field(
+        default_factory=list,
+        description="External tools or binaries required (e.g., git, npm)",
+    )
+
+    model_config = {"use_enum_values": True}
+
+
 class Agent(BaseModel):
     """Agent definition model."""
 
