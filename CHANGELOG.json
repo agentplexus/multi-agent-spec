@@ -7,6 +7,34 @@
   "maintainers": ["plexusone"],
   "releases": [
     {
+      "version": "v0.8.0",
+      "date": "2026-05-31",
+      "highlights": [
+        { "description": "Skill schema for defining reusable agent capabilities" },
+        { "description": "Single top-level Go module for simpler imports" },
+        { "description": "PlexusOne unified navigation and design system" }
+      ],
+      "added": [
+        { "description": "Skill type with triggers, dependencies, scripts, references, and assets", "commit": "114831b" },
+        { "description": "SkillSet collection with `FindByTrigger` for keyword-based skill lookup", "commit": "114831b" },
+        { "description": "Skill loading functions: `LoadSkillFromFile`, `LoadSkillsFromDir`, `LoadSkillSetFromDir`", "commit": "46c14aa" },
+        { "description": "Skill JSON schema (`schema/skill/skill.schema.json`)", "commit": "e730b4e" },
+        { "description": "PlexusOne unified navigation bar and theme integration", "commit": "f5de99b" }
+      ],
+      "changed": [
+        { "description": "Go module consolidated to single top-level `github.com/plexusone/multi-agent-spec`", "commit": "9612dad" },
+        { "description": "Go SDK import path unchanged - still use `github.com/plexusone/multi-agent-spec/sdk/go`", "commit": "9612dad" },
+        { "description": "CI workflows updated to use shared PlexusOne workflow templates", "commit": "d579d05" }
+      ],
+      "documentation": [
+        { "description": "Skill schema reference documentation (`docs/schemas/skill.md`)", "commit": "c0e5963" },
+        { "description": "GitHub PR review guide for Claude Code (`docs/guides/github-pr-review.md`)", "commit": "8f1debc" }
+      ],
+      "fixed": [
+        { "description": "golangci-lint `os.WriteFile` file mode warnings", "commit": "aac894a" }
+      ]
+    },
+    {
       "version": "v0.7.0",
       "date": "2026-02-28",
       "highlights": [
