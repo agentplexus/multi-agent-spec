@@ -3,7 +3,13 @@
 ## Go SDK
 
 ```bash
-go get github.com/plexusone/multi-agent-spec/sdk/go@latest
+go get github.com/plexusone/multi-agent-spec@latest
+```
+
+Import the SDK package:
+
+```go
+import multiagentspec "github.com/plexusone/multi-agent-spec/sdk/go"
 ```
 
 ## CLI

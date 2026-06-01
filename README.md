@@ -717,14 +717,13 @@ Canonical tool names map to platform-specific identifiers:
 ### Go SDK
 
 ```bash
-go get github.com/plexusone/multi-agent-spec/sdk/go@v0.8.0
+go get github.com/plexusone/multi-agent-spec@v0.8.0
 ```
 
-**Note for maintainers:** The Go module is located in `sdk/go/`. Per [Go module versioning](https://go.dev/ref/mod#vcs-version), tags for nested modules must be prefixed with the module path:
+Import the SDK package:
 
-```bash
-git tag sdk/go/v0.1.0
-git push origin sdk/go/v0.1.0
+```go
+import multiagentspec "github.com/plexusone/multi-agent-spec/sdk/go"
 ```
 
 ### Python SDK
