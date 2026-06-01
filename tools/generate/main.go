@@ -71,6 +71,17 @@ func run() error {
 		return fmt.Errorf("generating team-report schema: %w", err)
 	}
 
+	// Generate Skill schema
+	if err := generateSchema(
+		&multiagentspec.Skill{},
+		filepath.Join(outputDir, "skill", "skill.schema.json"),
+		"Multi-Agent Spec - Skill Definition",
+		"Schema for defining a reusable skill that agents can invoke",
+		"https://raw.githubusercontent.com/plexusone/multi-agent-spec/main/schema/skill/skill.schema.json",
+	); err != nil {
+		return fmt.Errorf("generating skill schema: %w", err)
+	}
+
 	fmt.Println("Schema generation complete!")
 	return nil
 }
