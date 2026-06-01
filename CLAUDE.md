@@ -63,6 +63,46 @@ multi-agent-spec/
    ```
 3. Run generator and commit both Go types and generated schemas together
 
+## SDK Generation
+
+### TypeScript SDK
+
+Auto-generated from JSON Schema using `json-schema-to-zod`:
+
+```bash
+cd sdk/typescript
+npm run generate   # Generates Zod schemas in src/generated/
+npm run build      # Compiles TypeScript
+```
+
+To add a new type, update `sdk/typescript/scripts/generate-schemas.mjs`:
+```javascript
+const SCHEMAS = [
+  // ... existing schemas
+  { file: 'category/newtype.schema.json', name: 'NewType' },
+];
+```
+
+### Python SDK
+
+Can be auto-generated from JSON Schema using `datamodel-code-generator`:
+
+```bash
+cd sdk/python
+pip install -e ".[dev]"
+python -m multi_agent_spec.scripts.generate
+```
+
+To add a new type, update `sdk/python/src/multi_agent_spec/scripts/generate.py`:
+```python
+SCHEMAS = [
+    # ... existing schemas
+    ("category/newtype.schema.json", "newtype"),
+]
+```
+
+**Note:** The main `models.py` contains manually curated models. Generated models go to `src/multi_agent_spec/generated/`.
+
 ## Release Process
 
 ### Pre-Release Checklist
