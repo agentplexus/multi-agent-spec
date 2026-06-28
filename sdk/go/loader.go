@@ -48,6 +48,11 @@ func (l *Loader) LoadSkill(path string) (*Skill, error) {
 	return LoadSkillFromFile(path)
 }
 
+// LoadLoop loads a Loop from a JSON or YAML file.
+func (l *Loader) LoadLoop(path string) (*Loop, error) {
+	return LoadLoopFromFile(path)
+}
+
 // LoadAgentFromFile loads an Agent from a markdown file with YAML frontmatter.
 //
 // The file format is:
@@ -335,6 +340,91 @@ func LoadDeploymentFromFile(path string) (*Deployment, error) {
 	}
 
 	return &deployment, nil
+}
+
+// LoadLoopFromFile loads a Loop from a JSON or YAML file.
+//
+// Supported formats:
+//   - JSON: Standard JSON object
+//   - YAML: Standard YAML document
+//
+// Example YAML:
+//
+//	name: qa-fix
+//	type: VEAL
+//	validator: qa
+//	actor: code-fixer
+//	max_attempts: 3
+//	escalation: human
+//	checks:
+//	  - id: build
+//	    type: command
+//	    command: go build ./...
+func LoadLoopFromFile(path string) (*Loop, error) {
+	data, err := os.ReadFile(path)
+	if err != nil {
+		return nil, fmt.Errorf("read file %s: %w", path, err)
+	}
+
+	ext := filepath.Ext(path)
+	var loop Loop
+
+	switch ext {
+	case ".json":
+		if err := json.Unmarshal(data, &loop); err != nil {
+			return nil, fmt.Errorf("parse json: %w", err)
+		}
+	case ".yaml", ".yml":
+		if err := yaml.Unmarshal(data, &loop); err != nil {
+			return nil, fmt.Errorf("parse yaml: %w", err)
+		}
+	default:
+		// Try JSON first, then YAML
+		if err := json.Unmarshal(data, &loop); err != nil {
+			if err := yaml.Unmarshal(data, &loop); err != nil {
+				return nil, fmt.Errorf("parse file (tried json and yaml): %w", err)
+			}
+		}
+	}
+
+	return &loop, nil
+}
+
+// LoadLoopsFromDir loads all Loop definitions from a directory.
+// It looks for .json, .yaml, and .yml files.
+//
+// Example structure:
+//
+//	loops/
+//	├── qa-fix.yaml
+//	├── docs-fix.yaml
+//	└── security-fix.json
+func LoadLoopsFromDir(dir string) ([]*Loop, error) {
+	entries, err := os.ReadDir(dir)
+	if err != nil {
+		return nil, fmt.Errorf("read dir %s: %w", dir, err)
+	}
+
+	var loops []*Loop
+	for _, entry := range entries {
+		if entry.IsDir() {
+			continue
+		}
+
+		ext := filepath.Ext(entry.Name())
+		if ext != ".json" && ext != ".yaml" && ext != ".yml" {
+			continue
+		}
+
+		path := filepath.Join(dir, entry.Name())
+		loop, err := LoadLoopFromFile(path)
+		if err != nil {
+			return nil, fmt.Errorf("load %s: %w", entry.Name(), err)
+		}
+		loops = append(loops, loop)
+	}
+
+	return loops, nil
 }
 
 // splitFrontmatter splits YAML frontmatter from markdown body.
