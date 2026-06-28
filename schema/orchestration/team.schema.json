@@ -111,7 +111,12 @@
           "type": "string"
         },
         "agent": {
-          "type": "string"
+          "type": "string",
+          "description": "Agent to execute this step (mutually exclusive with loop)"
+        },
+        "loop": {
+          "type": "string",
+          "description": "Loop to execute this step (mutually exclusive with agent)"
         },
         "depends_on": {
           "items": {
@@ -135,8 +140,11 @@
       "additionalProperties": false,
       "type": "object",
       "required": [
-        "name",
-        "agent"
+        "name"
+      ],
+      "oneOf": [
+        { "required": ["agent"] },
+        { "required": ["loop"] }
       ]
     },
     "Team": {

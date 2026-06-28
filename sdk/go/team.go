@@ -112,8 +112,12 @@ type Step struct {
 	// Name is the step identifier.
 	Name string `json:"name"`
 
-	// Agent is the agent to execute this step.
-	Agent string `json:"agent"`
+	// Agent is the agent to execute this step (mutually exclusive with Loop).
+	Agent string `json:"agent,omitempty"`
+
+	// Loop is the loop to execute this step (mutually exclusive with Agent).
+	// Use this for REAL or VEAL loop steps.
+	Loop string `json:"loop,omitempty"`
 
 	// DependsOn lists steps that must complete before this step.
 	DependsOn []string `json:"depends_on,omitempty"`
@@ -123,6 +127,16 @@ type Step struct {
 
 	// Outputs are typed data outputs produced by this step.
 	Outputs []Port `json:"outputs,omitempty"`
+}
+
+// IsLoopStep returns true if this step executes a loop.
+func (s *Step) IsLoopStep() bool {
+	return s.Loop != ""
+}
+
+// IsAgentStep returns true if this step executes an agent.
+func (s *Step) IsAgentStep() bool {
+	return s.Agent != ""
 }
 
 // Workflow represents a workflow definition.
