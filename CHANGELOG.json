@@ -7,6 +7,33 @@
   "maintainers": ["plexusone"],
   "releases": [
     {
+      "version": "v0.9.0",
+      "date": "2026-06-28",
+      "highlights": [
+        { "description": "REAL/VEAL autonomous loop patterns for agent orchestration" },
+        { "description": "Loop schema and Go SDK types for defining bounded execution loops" },
+        { "description": "Workflow steps can now reference loops instead of agents" }
+      ],
+      "added": [
+        { "description": "Loop schema (`schema/orchestration/loop.schema.json`) for REAL/VEAL patterns", "commit": "84b19d6" },
+        { "description": "LoopType enum: `REAL` (mission-driven) and `VEAL` (state-driven validation)", "commit": "504de39" },
+        { "description": "Loop struct with validator, actor, checks, max_attempts, escalation", "commit": "504de39" },
+        { "description": "LoopCheck for defining validation checks within loops", "commit": "504de39" },
+        { "description": "EscalationPolicy enum: human, abort, continue, fallback", "commit": "504de39" },
+        { "description": "LoopResult, IterationResult, CheckResult for execution tracking", "commit": "504de39" },
+        { "description": "Loop loading functions: `LoadLoopFromFile`, `LoadLoopsFromDir`", "commit": "614705a" },
+        { "description": "Loop field on workflow Step (mutually exclusive with Agent)", "commit": "aa4b97d" },
+        { "description": "Step helper methods: `IsLoopStep()`, `IsAgentStep()`", "commit": "aa4b97d" },
+        { "description": "Builder pattern: `NewLoop`, `NewVEALLoop`, `NewREALLoop`", "commit": "504de39" }
+      ],
+      "documentation": [
+        { "description": "REAL/VEAL loop pattern guide (`docs/guides/loops.md`)", "commit": "d6c587b" }
+      ],
+      "dependencies": [
+        { "description": "Go module dependencies updated", "commit": "191c4b0" }
+      ]
+    },
+    {
       "version": "v0.8.0",
       "date": "2026-05-31",
       "highlights": [

@@ -237,6 +237,35 @@ tools: [Bash, Read]
 Analyze the git commit history to determine the next semantic version.
 ```
 
+### Loop Schema (v0.9.0+)
+
+Defines autonomous loop patterns for agent orchestration.
+
+- **Schema**: [`schema/orchestration/loop.schema.json`](schema/orchestration/loop.schema.json)
+- **Format**: YAML or JSON
+
+```yaml
+name: qa-fix
+type: VEAL
+description: QA validation and fix loop
+validator: qa
+actor: code-fixer
+max_attempts: 3
+escalation: human
+checks:
+  - id: build
+    type: command
+    command: go build ./...
+  - id: lint
+    type: command
+    command: golangci-lint run
+```
+
+Loop types:
+
+- **REAL (Read Eval Act Loop)** - Mission-driven loops for open-ended tasks
+- **VEAL (Validate Eval Act Loop)** - State-driven validation loops that converge toward valid state
+
 ### Message Schema (v0.6.0+)
 
 Defines inter-agent messages for self-directed workflows.
@@ -767,7 +796,7 @@ Canonical tool names map to platform-specific identifiers:
 ### Go SDK
 
 ```bash
-go get github.com/plexusone/multi-agent-spec@v0.8.0
+go get github.com/plexusone/multi-agent-spec@v0.9.0
 ```
 
 Import the SDK package:
