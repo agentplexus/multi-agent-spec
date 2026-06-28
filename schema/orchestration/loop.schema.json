@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/plexusone/multi-agent-spec/main/schema/orchestration/loop.schema.json",
+  "$ref": "#/$defs/Loop",
+  "$defs": {
+    "LoopType": {
+      "type": "string",
+      "enum": ["REAL", "VEAL"],
+      "description": "Loop execution pattern: REAL (mission-driven) or VEAL (state-driven validation)"
+    },
+    "EscalationPolicy": {
+      "type": "string",
+      "enum": ["human", "abort", "continue", "fallback"],
+      "description": "Action to take when max attempts reached",
+      "default": "human"
+    },
+    "LoopCheckType": {
+      "type": "string",
+      "enum": ["command", "pattern", "file", "manual"],
+      "description": "How the check is executed"
+    },
+    "LoopCheck": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*$",
+          "description": "LoopCheck identifier (e.g., 'build', 'lint', 'changelog-json')"
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of what this check validates"
+        },
+        "type": {
+          "$ref": "#/$defs/LoopCheckType"
+        },
+        "command": {
+          "type": "string",
+          "description": "Shell command to execute (for type: command)"
+        },
+        "pattern": {
+          "type": "string",
+          "description": "Regex pattern to search for (for type: pattern)"
+        },
+        "files": {
+          "type": "string",
+          "description": "Glob pattern for files to check (for type: pattern)"
+        },
+        "file": {
+          "type": "string",
+          "description": "File path to check (for type: file)"
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Whether check failure causes NO-GO status",
+          "default": true
+        },
+        "expected": {
+          "type": "string",
+          "description": "Description of expected outcome for success"
+        }
+      },
+      "required": ["id"],
+      "additionalProperties": false
+    },
+    "Loop": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*$",
+          "description": "Loop identifier (e.g., 'qa-fix', 'docs-fix')"
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the loop's purpose"
+        },
+        "type": {
+          "$ref": "#/$defs/LoopType"
+        },
+        "validator": {
+          "type": "string",
+          "description": "Agent that validates state (read-only). Required for VEAL loops."
+        },
+        "actor": {
+          "type": "string",
+          "description": "Agent that acts to correct state (write access)"
+        },
+        "mission": {
+          "type": "string",
+          "description": "Mission statement for REAL loops. Describes the goal to achieve."
+        },
+        "checks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/LoopCheck"
+          },
+          "description": "Validation checks to run each iteration (primarily for VEAL loops)"
+        },
+        "max_attempts": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 3,
+          "description": "Maximum loop iterations before escalation"
+        },
+        "escalation": {
+          "$ref": "#/$defs/EscalationPolicy"
+        },
+        "fallback_agent": {
+          "type": "string",
+          "description": "Agent to invoke if escalation is 'fallback'"
+        },
+        "success_criteria": {
+          "type": "string",
+          "description": "Description of what constitutes loop success"
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "team.schema.json#/$defs/Port"
+          },
+          "description": "Data inputs required to start the loop"
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "$ref": "team.schema.json#/$defs/Port"
+          },
+          "description": "Data outputs produced when loop completes"
+        }
+      },
+      "required": ["name", "type", "actor"],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": { "type": { "const": "VEAL" } }
+          },
+          "then": {
+            "required": ["validator"]
+          }
+        },
+        {
+          "if": {
+            "properties": { "escalation": { "const": "fallback" } }
+          },
+          "then": {
+            "required": ["fallback_agent"]
+          }
+        }
+      ]
+    }
+  },
+  "title": "Multi-Agent Spec - Loop Definition",
+  "description": "Schema for defining REAL/VEAL autonomous loop patterns"
+}
