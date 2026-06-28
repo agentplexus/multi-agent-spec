@@ -261,10 +261,24 @@ checks:
     command: golangci-lint run
 ```
 
-Loop types:
+**Loop Types:**
 
-- **REAL (Read Eval Act Loop)** - Mission-driven loops for open-ended tasks
-- **VEAL (Validate Eval Act Loop)** - State-driven validation loops that converge toward valid state
+| Type | Category | Use Case | Typical max_attempts |
+|------|----------|----------|---------------------|
+| **REAL** | Mission-driven | Roadmaps, migrations, feature implementations | 10-100 |
+| **VEAL** | State-driven | QA fixes, lint fixes, doc updates | 3-5 |
+
+**Bounded Execution:**
+
+Loops run autonomously but are bounded to prevent infinite execution:
+
+| Field | Default | Description |
+|-------|---------|-------------|
+| `max_attempts` | 3 | Maximum iterations before escalation |
+| `escalation` | `human` | Policy: `human`, `abort`, `continue`, `fallback` |
+| `success_criteria` | - | What success looks like |
+
+See [Loop Pattern Guide](docs/guides/loops.md) for detailed documentation.
 
 ### Message Schema (v0.6.0+)
 
