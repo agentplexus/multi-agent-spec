@@ -13,6 +13,10 @@
         <link rel="canonical" href="https://plexusone.github.io/multi-agent-spec/guides/loops/">
       
       
+        <link rel="prev" href="../github-pr-review/">
+      
+      
+        <link rel="next" href="../../releases/v0.9.0/">
       
       
         
@@ -23,7 +27,7 @@
     
     
       
-        <title>REAL/VEAL Loop Patterns - Multi-Agent Spec</title>
+        <title>REAL/VEAL Loops - Multi-Agent Spec</title>
       
     
     
@@ -117,7 +121,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              REAL/VEAL Loop Patterns
+              REAL/VEAL Loops
             
           </span>
         </div>
@@ -623,6 +627,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schemas/loop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -901,8 +933,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -913,13 +947,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
         
           
           <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
@@ -940,7 +972,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             
@@ -974,6 +1006,258 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    REAL/VEAL Loops
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    REAL/VEAL Loops
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loop-hierarchy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Loop Hierarchy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#real-read-eval-act-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        REAL — Read Eval Act Loop
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#veal-validate-eval-act-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VEAL — Validate Eval Act Loop
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loop-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Loop Configuration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Loop Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Fields
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#veal-specific-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VEAL-Specific Fields
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-specific-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        REAL-Specific Fields
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check Definition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#escalation-policies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escalation Policies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-loops-in-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using Loops in Workflows
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#go-sdk-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Go SDK Usage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Go SDK Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-loops-programmatically" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creating Loops Programmatically
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loading-loops-from-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Loading Loops from Files
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Best Practices
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1039,6 +1323,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/v0.9.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.9.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 

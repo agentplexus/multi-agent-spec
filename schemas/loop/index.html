@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://plexusone.github.io/multi-agent-spec/schemas/skill/">
+        <link rel="canonical" href="https://plexusone.github.io/multi-agent-spec/schemas/loop/">
       
       
-        <link rel="prev" href="../report/">
+        <link rel="prev" href="../skill/">
       
       
-        <link rel="next" href="../loop/">
+        <link rel="next" href="../../cli/mas/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Skill - Multi-Agent Spec</title>
+        <title>Loop - Multi-Agent Spec</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#skill-schema" class="md-skip">
+        <a href="#loop-schema" class="md-skip">
           Skip to content
         </a>
       
@@ -121,7 +121,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Skill
+              Loop
             
           </span>
         </div>
@@ -603,6 +603,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../skill/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Skill
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -622,7 +650,7 @@
   <span class="md-ellipsis">
     
   
-    Skill
+    Loop
   
 
     
@@ -640,7 +668,7 @@
   <span class="md-ellipsis">
     
   
-    Skill
+    Loop
   
 
     
@@ -666,10 +694,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#schema-url" class="md-nav__link">
+  <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Schema URL
+        Overview
       
     </span>
   </a>
@@ -677,10 +705,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#structure" class="md-nav__link">
+  <a href="#loop-types" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Structure
+        Loop Types
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schema-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schema Definition
       
     </span>
   </a>
@@ -700,10 +739,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#required-fields" class="md-nav__link">
+  <a href="#common-fields" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Required Fields
+        Common Fields
       
     </span>
   </a>
@@ -711,10 +750,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#core-fields" class="md-nav__link">
+  <a href="#veal-specific-fields" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Core Fields
+        VEAL-Specific Fields
       
     </span>
   </a>
@@ -722,21 +761,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#resource-fields" class="md-nav__link">
+  <a href="#real-specific-fields" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Resource Fields
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#invocation-fields" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Invocation Fields
+        REAL-Specific Fields
       
     </span>
   </a>
@@ -749,10 +777,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#file-format" class="md-nav__link">
+  <a href="#check-definition" class="md-nav__link">
     <span class="md-ellipsis">
       
-        File Format
+        Check Definition
       
     </span>
   </a>
@@ -760,10 +788,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#directory-structure" class="md-nav__link">
+  <a href="#escalation-policies" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Directory Structure
+        Escalation Policies
       
     </span>
   </a>
@@ -771,10 +799,49 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#example-commit-classification-skill" class="md-nav__link">
+  <a href="#examples" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Example: Commit Classification Skill
+        Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#veal-loop-state-driven" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VEAL Loop (State-Driven)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-loop-mission-driven" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        REAL Loop (Mission-Driven)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-loops-in-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using Loops in Workflows
       
     </span>
   </a>
@@ -793,21 +860,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#platform-mappings" class="md-nav__link">
+  <a href="#related" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Platform Mappings
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#best-practices" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Best Practices
+        Related
       
     </span>
   </a>
@@ -818,34 +874,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../loop/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Loop
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -1582,10 +1610,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#schema-url" class="md-nav__link">
+  <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Schema URL
+        Overview
       
     </span>
   </a>
@@ -1593,10 +1621,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#structure" class="md-nav__link">
+  <a href="#loop-types" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Structure
+        Loop Types
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schema-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schema Definition
       
     </span>
   </a>
@@ -1616,10 +1655,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#required-fields" class="md-nav__link">
+  <a href="#common-fields" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Required Fields
+        Common Fields
       
     </span>
   </a>
@@ -1627,10 +1666,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#core-fields" class="md-nav__link">
+  <a href="#veal-specific-fields" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Core Fields
+        VEAL-Specific Fields
       
     </span>
   </a>
@@ -1638,21 +1677,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#resource-fields" class="md-nav__link">
+  <a href="#real-specific-fields" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Resource Fields
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#invocation-fields" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Invocation Fields
+        REAL-Specific Fields
       
     </span>
   </a>
@@ -1665,10 +1693,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#file-format" class="md-nav__link">
+  <a href="#check-definition" class="md-nav__link">
     <span class="md-ellipsis">
       
-        File Format
+        Check Definition
       
     </span>
   </a>
@@ -1676,10 +1704,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#directory-structure" class="md-nav__link">
+  <a href="#escalation-policies" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Directory Structure
+        Escalation Policies
       
     </span>
   </a>
@@ -1687,10 +1715,49 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#example-commit-classification-skill" class="md-nav__link">
+  <a href="#examples" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Example: Commit Classification Skill
+        Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#veal-loop-state-driven" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VEAL Loop (State-Driven)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-loop-mission-driven" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        REAL Loop (Mission-Driven)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-loops-in-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using Loops in Workflows
       
     </span>
   </a>
@@ -1709,21 +1776,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#platform-mappings" class="md-nav__link">
+  <a href="#related" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Platform Mappings
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#best-practices" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Best Practices
+        Related
       
     </span>
   </a>
@@ -1750,33 +1806,61 @@
   
 
 
-<h1 id="skill-schema">Skill Schema<a class="headerlink" href="#skill-schema" title="Permanent link">&para;</a></h1>
-<p>Defines reusable capabilities that agents can invoke. Skills encapsulate instructions, scripts, and resources for specific tasks.</p>
-<h2 id="schema-url">Schema URL<a class="headerlink" href="#schema-url" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>https://raw.githubusercontent.com/plexusone/multi-agent-spec/main/schema/skill/skill.schema.json
-</code></pre></div>
-<h2 id="structure">Structure<a class="headerlink" href="#structure" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">,</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="nt">&quot;instructions&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="nt">&quot;scripts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;string&quot;</span><span class="p">],</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span><span class="nt">&quot;references&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;string&quot;</span><span class="p">],</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span><span class="nt">&quot;assets&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;string&quot;</span><span class="p">],</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">  </span><span class="nt">&quot;triggers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;string&quot;</span><span class="p">],</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">  </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;string&quot;</span><span class="p">],</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">  </span><span class="nt">&quot;model&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;haiku|sonnet|opus&quot;</span><span class="p">,</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">  </span><span class="nt">&quot;tools&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;string&quot;</span><span class="p">]</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="p">}</span>
+<h1 id="loop-schema">Loop Schema<a class="headerlink" href="#loop-schema" title="Permanent link">&para;</a></h1>
+<p>The loop schema defines autonomous loop patterns for multi-agent systems.</p>
+<p><strong>Schema</strong>: <a href="https://github.com/plexusone/multi-agent-spec/blob/main/schema/orchestration/loop.schema.json"><code>schema/orchestration/loop.schema.json</code></a></p>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>Loops are bounded execution patterns that run autonomously until completion or escalation. They are inspired by the REPL (Read-Eval-Print-Loop) pattern from interactive programming.</p>
+<h2 id="loop-types">Loop Types<a class="headerlink" href="#loop-types" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Category</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>REAL</code></td>
+<td>Mission-driven</td>
+<td>Read requirements, Eval situation, Act toward goal, Loop</td>
+</tr>
+<tr>
+<td><code>VEAL</code></td>
+<td>State-driven</td>
+<td>Validate state, Eval findings, Act to correct, Loop</td>
+</tr>
+</tbody>
+</table>
+<h2 id="schema-definition">Schema Definition<a class="headerlink" href="#schema-definition" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qa-fix</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VEAL</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">QA validation and fix loop</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nt">validator</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qa</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nt">actor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">code-fixer</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nt">max_attempts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="nt">escalation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">human</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nt">success_criteria</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">All checks pass with GO status</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="nt">checks</span><span class="p">:</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">command</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">go build ./...</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="nt">expected</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Exit code 0</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lint</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">command</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">golangci-lint run</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
 <h2 id="fields">Fields<a class="headerlink" href="#fields" title="Permanent link">&para;</a></h2>
-<h3 id="required-fields">Required Fields<a class="headerlink" href="#required-fields" title="Permanent link">&para;</a></h3>
+<h3 id="common-fields">Common Fields<a class="headerlink" href="#common-fields" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
 <th>Field</th>
 <th>Type</th>
+<th>Required</th>
 <th>Description</th>
 </tr>
 </thead>
@@ -1784,238 +1868,278 @@
 <tr>
 <td><code>name</code></td>
 <td>string</td>
-<td>Unique skill identifier (lowercase, hyphenated)</td>
+<td>Yes</td>
+<td>Loop identifier (kebab-case)</td>
 </tr>
-</tbody>
-</table>
-<h3 id="core-fields">Core Fields<a class="headerlink" href="#core-fields" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
 <tr>
-<th>Field</th>
-<th>Type</th>
-<th>Description</th>
+<td><code>type</code></td>
+<td>string</td>
+<td>Yes</td>
+<td><code>REAL</code> or <code>VEAL</code></td>
 </tr>
-</thead>
-<tbody>
 <tr>
 <td><code>description</code></td>
 <td>string</td>
-<td>Brief summary of what the skill does</td>
+<td>No</td>
+<td>Human-readable description</td>
 </tr>
 <tr>
-<td><code>instructions</code></td>
+<td><code>actor</code></td>
 <td>string</td>
-<td>Main prompt/instructions executed when skill is invoked</td>
+<td>Yes</td>
+<td>Agent that performs actions</td>
 </tr>
 <tr>
-<td><code>model</code></td>
+<td><code>max_attempts</code></td>
+<td>integer</td>
+<td>No</td>
+<td>Maximum iterations (default: 3)</td>
+</tr>
+<tr>
+<td><code>escalation</code></td>
 <td>string</td>
-<td>Recommended model tier: <code>haiku</code>, <code>sonnet</code>, <code>opus</code></td>
+<td>No</td>
+<td>Policy when max reached (default: <code>human</code>)</td>
 </tr>
 <tr>
-<td><code>tools</code></td>
-<td>string[]</td>
-<td>Tools this skill requires access to</td>
+<td><code>success_criteria</code></td>
+<td>string</td>
+<td>No</td>
+<td>Description of success conditions</td>
+</tr>
+<tr>
+<td><code>inputs</code></td>
+<td>array</td>
+<td>No</td>
+<td>Data inputs required to start the loop</td>
+</tr>
+<tr>
+<td><code>outputs</code></td>
+<td>array</td>
+<td>No</td>
+<td>Data outputs produced when loop completes</td>
 </tr>
 </tbody>
 </table>
-<h3 id="resource-fields">Resource Fields<a class="headerlink" href="#resource-fields" title="Permanent link">&para;</a></h3>
+<h3 id="veal-specific-fields">VEAL-Specific Fields<a class="headerlink" href="#veal-specific-fields" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
 <th>Field</th>
 <th>Type</th>
+<th>Required</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>scripts</code></td>
-<td>string[]</td>
-<td>Paths to executable scripts relative to skill directory</td>
+<td><code>validator</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Agent that validates state (read-only)</td>
 </tr>
 <tr>
-<td><code>references</code></td>
-<td>string[]</td>
-<td>Paths to reference documentation</td>
-</tr>
-<tr>
-<td><code>assets</code></td>
-<td>string[]</td>
-<td>Paths to templates, config files, or other resources</td>
+<td><code>checks</code></td>
+<td>array</td>
+<td>Yes</td>
+<td>Validation checks to run</td>
 </tr>
 </tbody>
 </table>
-<h3 id="invocation-fields">Invocation Fields<a class="headerlink" href="#invocation-fields" title="Permanent link">&para;</a></h3>
+<h3 id="real-specific-fields">REAL-Specific Fields<a class="headerlink" href="#real-specific-fields" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
 <th>Field</th>
 <th>Type</th>
+<th>Required</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>triggers</code></td>
-<td>string[]</td>
-<td>Keywords or patterns that invoke this skill</td>
-</tr>
-<tr>
-<td><code>dependencies</code></td>
-<td>string[]</td>
-<td>External tools/binaries required (e.g., <code>git</code>, <code>npm</code>)</td>
+<td><code>mission</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Goal statement for the loop</td>
 </tr>
 </tbody>
 </table>
-<h2 id="file-format">File Format<a class="headerlink" href="#file-format" title="Permanent link">&para;</a></h2>
-<p>Skills are defined in Markdown with YAML frontmatter:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>---
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>name: version-analysis
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>description: Analyze git history for semantic versioning
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>model: haiku
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>triggers: [version, semver, changelog]
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>dependencies: [git]
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>tools: [Bash, Read]
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>scripts:
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">  </span><span class="k">-</span><span class="w"> </span>scripts/analyze.sh
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>references:
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="gu">  - docs/semver.md</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="gu">---</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="gh"># Version Analysis</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>Analyze the git commit history to determine the next semantic version.
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="gu">## Instructions</span>
-<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>
-<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="k">1.</span> Look at commits since the last tag
-<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="k">2.</span> Classify each commit type (feat, fix, etc.)
-<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="k">3.</span> Determine major/minor/patch bump based on conventional commits
+<h2 id="check-definition">Check Definition<a class="headerlink" href="#check-definition" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Check identifier (kebab-case)</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>string</td>
+<td>No</td>
+<td><code>command</code>, <code>pattern</code>, <code>file</code>, or <code>manual</code></td>
+</tr>
+<tr>
+<td><code>command</code></td>
+<td>string</td>
+<td>No</td>
+<td>Shell command (for type: command)</td>
+</tr>
+<tr>
+<td><code>pattern</code></td>
+<td>string</td>
+<td>No</td>
+<td>Regex pattern (for type: pattern)</td>
+</tr>
+<tr>
+<td><code>files</code></td>
+<td>string</td>
+<td>No</td>
+<td>Glob pattern for files to check</td>
+</tr>
+<tr>
+<td><code>file</code></td>
+<td>string</td>
+<td>No</td>
+<td>File path (for type: file)</td>
+</tr>
+<tr>
+<td><code>required</code></td>
+<td>boolean</td>
+<td>No</td>
+<td>Causes NO-GO if failed (default: true)</td>
+</tr>
+<tr>
+<td><code>expected</code></td>
+<td>string</td>
+<td>No</td>
+<td>Description of success</td>
+</tr>
+</tbody>
+</table>
+<h2 id="escalation-policies">Escalation Policies<a class="headerlink" href="#escalation-policies" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Policy</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>human</code></td>
+<td>Stop and request human intervention</td>
+</tr>
+<tr>
+<td><code>abort</code></td>
+<td>Stop and fail the workflow</td>
+</tr>
+<tr>
+<td><code>continue</code></td>
+<td>Proceed despite unresolved issues</td>
+</tr>
+<tr>
+<td><code>fallback</code></td>
+<td>Invoke a fallback agent</td>
+</tr>
+</tbody>
+</table>
+<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
+<h3 id="veal-loop-state-driven">VEAL Loop (State-Driven)<a class="headerlink" href="#veal-loop-state-driven" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qa-fix</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VEAL</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">QA validation and fix loop</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nt">validator</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qa</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nt">actor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">code-fixer</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nt">max_attempts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nt">escalation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">human</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="nt">checks</span><span class="p">:</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">command</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">go build ./...</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tests</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">command</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">go test -v ./...</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lint</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">command</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">golangci-lint run</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
-<h2 id="directory-structure">Directory Structure<a class="headerlink" href="#directory-structure" title="Permanent link">&para;</a></h2>
-<p>Skills are organized in a directory structure:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>skills/
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>├── version-analysis/
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>│   ├── SKILL.md           # Skill definition
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>│   ├── scripts/           # Executable scripts
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>│   │   └── analyze.sh
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>│   ├── references/        # Reference documentation
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>│   │   └── semver.md
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>│   └── assets/            # Templates, configs
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>│       └── categories.json
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>├── commit-classification/
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>│   └── SKILL.md
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>└── changelog/
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>    └── SKILL.md
+<h3 id="real-loop-mission-driven">REAL Loop (Mission-Driven)<a class="headerlink" href="#real-loop-mission-driven" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">feature-impl</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">REAL</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Feature implementation loop</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="nt">actor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">developer</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="nt">mission</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="no">Implement user authentication with OAuth2 support.</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span><span class="no">Must include login, logout, and session management.</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="nt">max_attempts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="nt">escalation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">human</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="nt">success_criteria</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">  </span><span class="no">All authentication flows work correctly.</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">  </span><span class="no">Tests pass. Documentation updated.</span>
 </code></pre></div>
-<h2 id="example-commit-classification-skill">Example: Commit Classification Skill<a class="headerlink" href="#example-commit-classification-skill" title="Permanent link">&para;</a></h2>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>---
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>name: commit-classification
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>description: Classify commits according to conventional commits specification
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>model: haiku
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>triggers: [classify, commit, conventional]
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>dependencies: [git]
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="gu">tools: [Bash, Read]</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="gu">---</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="gh"># Commit Classification</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>Classify git commits using the conventional commits specification.
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="gu">## Instructions</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>Analyze each commit message and classify it into one of:
-<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>
-<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="k">-</span><span class="w"> </span><span class="gs">**feat**</span>: New feature
-<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="k">-</span><span class="w"> </span><span class="gs">**fix**</span>: Bug fix
-<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="k">-</span><span class="w"> </span><span class="gs">**docs**</span>: Documentation changes
-<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="k">-</span><span class="w"> </span><span class="gs">**style**</span>: Code style changes (formatting, semicolons)
-<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="k">-</span><span class="w"> </span><span class="gs">**refactor**</span>: Code refactoring
-<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="k">-</span><span class="w"> </span><span class="gs">**perf**</span>: Performance improvements
-<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="k">-</span><span class="w"> </span><span class="gs">**test**</span>: Adding or updating tests
-<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="k">-</span><span class="w"> </span><span class="gs">**build**</span>: Build system changes
-<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="k">-</span><span class="w"> </span><span class="gs">**ci**</span>: CI configuration changes
-<a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a><span class="k">-</span><span class="w"> </span><span class="gs">**chore**</span>: Other changes (dependencies, configs)
-<a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>
-<a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a><span class="gu">## Output Format</span>
-<a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>
-<a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a>Return a JSON array of classified commits:
-<a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a>
-<a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a>```json
-<a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a>[
-<a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a>  {&quot;hash&quot;: &quot;abc123&quot;, &quot;type&quot;: &quot;feat&quot;, &quot;scope&quot;: &quot;auth&quot;, &quot;subject&quot;: &quot;add OAuth support&quot;},
-<a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a>  {&quot;hash&quot;: &quot;def456&quot;, &quot;type&quot;: &quot;fix&quot;, &quot;scope&quot;: null, &quot;subject&quot;: &quot;resolve race condition&quot;}
-<a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a>]
+<h2 id="using-loops-in-workflows">Using Loops in Workflows<a class="headerlink" href="#using-loops-in-workflows" title="Permanent link">&para;</a></h2>
+<p>Loops can be referenced as steps in team workflows:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">&quot;workflow&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;chain&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">&quot;steps&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;validate-scope&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;agent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pm&quot;</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;qa-fix&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;loop&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;qa-fix&quot;</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;docs-fix&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;loop&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;docs-fix&quot;</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tag-release&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;agent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;release&quot;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="p">]</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="p">}</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>## Using Skills in Agents
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>Agents reference skills by name in their `skills` field:
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>```yaml
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>---
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>name: release-agent
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>description: Manages releases
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>skills:
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>  - version-analysis
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>  - commit-classification
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>  - changelog
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>---
-</code></pre></div></p>
-<p>When an agent encounters a trigger keyword (e.g., "version" or "classify"), it should consider invoking the matching skill.</p>
 <h2 id="go-sdk-usage">Go SDK Usage<a class="headerlink" href="#go-sdk-usage" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">import</span><span class="w"> </span><span class="nx">multiagentspec</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/multi-agent-spec/sdk/go&quot;</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1">// Create a skill programmatically</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="nx">skill</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">multiagentspec</span><span class="p">.</span><span class="nx">NewSkill</span><span class="p">(</span><span class="s">&quot;version-analysis&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Analyze versions&quot;</span><span class="p">).</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="nx">WithInstructions</span><span class="p">(</span><span class="s">&quot;Analyze git history...&quot;</span><span class="p">).</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="nx">WithModel</span><span class="p">(</span><span class="nx">multiagentspec</span><span class="p">.</span><span class="nx">ModelHaiku</span><span class="p">).</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="nx">WithTools</span><span class="p">(</span><span class="s">&quot;Bash&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Read&quot;</span><span class="p">).</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="nx">AddTrigger</span><span class="p">(</span><span class="s">&quot;version&quot;</span><span class="p">).</span>
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span><span class="nx">AddTrigger</span><span class="p">(</span><span class="s">&quot;semver&quot;</span><span class="p">).</span>
-<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span><span class="nx">AddDependency</span><span class="p">(</span><span class="s">&quot;git&quot;</span><span class="p">).</span>
-<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">    </span><span class="nx">AddScript</span><span class="p">(</span><span class="s">&quot;scripts/analyze.sh&quot;</span><span class="p">)</span>
-<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>
-<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="c1">// Load skills from directory</span>
-<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="nx">skills</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">multiagentspec</span><span class="p">.</span><span class="nx">LoadSkillsFromDir</span><span class="p">(</span><span class="s">&quot;skills/&quot;</span><span class="p">)</span>
-<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>
-<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="c1">// Load into a SkillSet for querying</span>
-<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="nx">skillSet</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">multiagentspec</span><span class="p">.</span><span class="nx">LoadSkillSetFromDir</span><span class="p">(</span><span class="s">&quot;skills/&quot;</span><span class="p">)</span>
-<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="nx">matches</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">skillSet</span><span class="p">.</span><span class="nx">FindByTrigger</span><span class="p">(</span><span class="s">&quot;version&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">import</span><span class="w"> </span><span class="nx">mas</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/multi-agent-spec/sdk/go&quot;</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1">// Create a VEAL loop</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="nx">qaLoop</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">mas</span><span class="p">.</span><span class="nx">NewVEALLoop</span><span class="p">(</span><span class="s">&quot;qa-fix&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;qa&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;code-fixer&quot;</span><span class="p">).</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nx">WithDescription</span><span class="p">(</span><span class="s">&quot;QA validation and fix loop&quot;</span><span class="p">).</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="nx">WithMaxAttempts</span><span class="p">(</span><span class="mi">3</span><span class="p">).</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="nx">AddCheck</span><span class="p">(</span><span class="nx">mas</span><span class="p">.</span><span class="nx">LoopCheck</span><span class="p">{</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">        </span><span class="nx">ID</span><span class="p">:</span><span class="w">      </span><span class="s">&quot;build&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">        </span><span class="nx">Type</span><span class="p">:</span><span class="w">    </span><span class="nx">mas</span><span class="p">.</span><span class="nx">CheckTypeCommand</span><span class="p">,</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">        </span><span class="nx">Command</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;go build ./...&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">    </span><span class="p">})</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="c1">// Create a REAL loop</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="nx">featureLoop</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">mas</span><span class="p">.</span><span class="nx">NewREALLoop</span><span class="p">(</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">    </span><span class="s">&quot;feature-impl&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">    </span><span class="s">&quot;developer&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">    </span><span class="s">&quot;Implement user authentication&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="p">)</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="c1">// Validate</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">qaLoop</span><span class="p">.</span><span class="nx">Validate</span><span class="p">();</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="p">}</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>
+<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="c1">// Load from file</span>
+<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="nx">loop</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">mas</span><span class="p">.</span><span class="nx">LoadLoopFromFile</span><span class="p">(</span><span class="s">&quot;specs/loops/qa-fix.yaml&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>
+<a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a><span class="c1">// Load from directory</span>
+<a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a><span class="nx">loops</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">mas</span><span class="p">.</span><span class="nx">LoadLoopsFromDir</span><span class="p">(</span><span class="s">&quot;specs/loops&quot;</span><span class="p">)</span>
 </code></pre></div>
-<h2 id="platform-mappings">Platform Mappings<a class="headerlink" href="#platform-mappings" title="Permanent link">&para;</a></h2>
-<p>Skills are mapped to platform-specific formats:</p>
-<table>
-<thead>
-<tr>
-<th>Platform</th>
-<th>Skill Format</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Claude Code</td>
-<td><code>skills/&lt;name&gt;/SKILL.md</code></td>
-</tr>
-<tr>
-<td>Kiro CLI</td>
-<td><code>steering/&lt;name&gt;.md</code></td>
-</tr>
-<tr>
-<td>OpenAI Codex</td>
-<td><code>skills/&lt;name&gt;/SKILL.md</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="best-practices">Best Practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
-<ol>
-<li><strong>Single Responsibility</strong>: Each skill should do one thing well</li>
-<li><strong>Clear Triggers</strong>: Use specific, unambiguous trigger keywords</li>
-<li><strong>Document Dependencies</strong>: List all required external tools</li>
-<li><strong>Include Examples</strong>: Show expected input/output in instructions</li>
-<li><strong>Reference Documentation</strong>: Link to external docs for complex topics</li>
-</ol>
+<h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../../guides/loops/">Loop Pattern Guide</a> - Detailed guide on REAL/VEAL patterns</li>
+<li><a href="../team/">Team Schema</a> - Using loops in workflow steps</li>
+</ul>
 
 
 

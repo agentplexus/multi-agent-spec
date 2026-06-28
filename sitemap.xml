@@ -61,11 +61,19 @@
          <lastmod>2026-06-28</lastmod>
     </url>
     <url>
+         <loc>https://plexusone.github.io/multi-agent-spec/releases/v0.9.0/</loc>
+         <lastmod>2026-06-28</lastmod>
+    </url>
+    <url>
          <loc>https://plexusone.github.io/multi-agent-spec/schemas/agent/</loc>
          <lastmod>2026-06-28</lastmod>
     </url>
     <url>
          <loc>https://plexusone.github.io/multi-agent-spec/schemas/deployment/</loc>
+         <lastmod>2026-06-28</lastmod>
+    </url>
+    <url>
+         <loc>https://plexusone.github.io/multi-agent-spec/schemas/loop/</loc>
          <lastmod>2026-06-28</lastmod>
     </url>
     <url>
