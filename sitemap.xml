@@ -2,98 +2,102 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://plexusone.github.io/multi-agent-spec/</loc>
-         <lastmod>2026-06-28</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://plexusone.github.io/multi-agent-spec/cli/mas/</loc>
-         <lastmod>2026-06-28</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://plexusone.github.io/multi-agent-spec/examples/stats-agent-team/</loc>
-         <lastmod>2026-06-28</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://plexusone.github.io/multi-agent-spec/getting-started/installation/</loc>
-         <lastmod>2026-06-28</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://plexusone.github.io/multi-agent-spec/getting-started/quickstart/</loc>
-         <lastmod>2026-06-28</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://plexusone.github.io/multi-agent-spec/guides/github-pr-review/</loc>
-         <lastmod>2026-06-28</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://plexusone.github.io/multi-agent-spec/guides/loops/</loc>
-         <lastmod>2026-06-28</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://plexusone.github.io/multi-agent-spec/releases/v0.1.0/</loc>
-         <lastmod>2026-06-28</lastmod>
+         <lastmod>2026-08-31</lastmod>
+    </url>
+    <url>
+         <loc>https://plexusone.github.io/multi-agent-spec/releases/v0.10.0/</loc>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://plexusone.github.io/multi-agent-spec/releases/v0.2.0/</loc>
-         <lastmod>2026-06-28</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://plexusone.github.io/multi-agent-spec/releases/v0.3.0/</loc>
-         <lastmod>2026-06-28</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://plexusone.github.io/multi-agent-spec/releases/v0.4.0/</loc>
-         <lastmod>2026-06-28</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://plexusone.github.io/multi-agent-spec/releases/v0.5.0/</loc>
-         <lastmod>2026-06-28</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://plexusone.github.io/multi-agent-spec/releases/v0.6.0/</loc>
-         <lastmod>2026-06-28</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://plexusone.github.io/multi-agent-spec/releases/v0.7.0/</loc>
-         <lastmod>2026-06-28</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://plexusone.github.io/multi-agent-spec/releases/v0.8.0/</loc>
-         <lastmod>2026-06-28</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://plexusone.github.io/multi-agent-spec/releases/v0.9.0/</loc>
-         <lastmod>2026-06-28</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://plexusone.github.io/multi-agent-spec/schemas/agent/</loc>
-         <lastmod>2026-06-28</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://plexusone.github.io/multi-agent-spec/schemas/deployment/</loc>
-         <lastmod>2026-06-28</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://plexusone.github.io/multi-agent-spec/schemas/loop/</loc>
-         <lastmod>2026-06-28</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://plexusone.github.io/multi-agent-spec/schemas/overview/</loc>
-         <lastmod>2026-06-28</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://plexusone.github.io/multi-agent-spec/schemas/report/</loc>
-         <lastmod>2026-06-28</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://plexusone.github.io/multi-agent-spec/schemas/skill/</loc>
-         <lastmod>2026-06-28</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://plexusone.github.io/multi-agent-spec/schemas/team/</loc>
-         <lastmod>2026-06-28</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://plexusone.github.io/multi-agent-spec/sdk/go/</loc>
-         <lastmod>2026-06-28</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
 </urlset>

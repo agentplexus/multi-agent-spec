@@ -1436,6 +1436,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../releases/v0.10.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.10.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../releases/v0.9.0/" class="md-nav__link">
         
   
@@ -2104,6 +2132,7 @@
 <a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a><span class="nx">team</span><span class="p">.</span><span class="nx">IsSelfDirected</span><span class="p">()</span><span class="w">    </span><span class="c1">// true for crew, swarm, council</span>
 <a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a><span class="nx">team</span><span class="p">.</span><span class="nx">EffectiveLead</span><span class="p">()</span><span class="w">     </span><span class="c1">// returns lead agent name</span>
 <a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a><span class="nx">team</span><span class="p">.</span><span class="nx">Validate</span><span class="p">()</span><span class="w">          </span><span class="c1">// validates workflow-specific requirements</span>
+<a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a><span class="nx">team</span><span class="p">.</span><span class="nx">ValidateAgentReferences</span><span class="p">(</span><span class="nx">names</span><span class="p">)</span><span class="w"> </span><span class="c1">// returns joined error for unresolved agent refs</span>
 </code></pre></div>
 <h3 id="workflow-types">Workflow Types<a class="headerlink" href="#workflow-types" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">// Workflow categories</span>
@@ -2321,6 +2350,13 @@
 <a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">team</span><span class="p">.</span><span class="nx">Validate</span><span class="p">();</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="c1">// &quot;crew workflow requires collaboration.lead&quot;</span>
 <a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="p">}</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="c1">// Check the team&#39;s roster, orchestrator, and workflow steps against the</span>
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="c1">// agents actually available, e.g. after scanning an agent spec directory.</span>
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a><span class="nx">availableAgents</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;architect&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;frontend&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;backend&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;qa&quot;</span><span class="p">}</span>
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">team</span><span class="p">.</span><span class="nx">ValidateAgentReferences</span><span class="p">(</span><span class="nx">availableAgents</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a><span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="c1">// e.g. `team &quot;dev-team&quot; roster references agent &quot;backend-old&quot; with no matching spec`</span>
+<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a><span class="p">}</span>
 </code></pre></div>
 <h3 id="swarm-workflow">Swarm Workflow<a class="headerlink" href="#swarm-workflow" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nx">team</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">mas</span><span class="p">.</span><span class="nx">NewTeam</span><span class="p">(</span><span class="s">&quot;triage-team&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;1.0.0&quot;</span><span class="p">).</span>
