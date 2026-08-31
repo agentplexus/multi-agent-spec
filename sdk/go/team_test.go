@@ -2,6 +2,7 @@ package multiagentspec
 
 import (
 	"encoding/json"
+	"strings"
 	"testing"
 )
 
@@ -340,5 +341,114 @@ func TestTeamJSONSerialization(t *testing.T) {
 	}
 	if len(decoded.Agents) != 2 {
 		t.Errorf("len(Agents) = %d, want 2", len(decoded.Agents))
+	}
+}
+
+func TestTeam_ValidateAgentReferences_AllResolve(t *testing.T) {
+	team := NewTeam("test", "1.0.0").
+		WithAgents("qa", "release").
+		WithOrchestrator("release").
+		WithWorkflow(&Workflow{
+			Type: WorkflowChain,
+			Steps: []Step{
+				{Name: "qa-validation", Agent: "qa"},
+				{Name: "ship", Agent: "release"},
+			},
+		})
+
+	if err := team.ValidateAgentReferences([]string{"qa", "release"}); err != nil {
+		t.Errorf("ValidateAgentReferences() = %v, want nil", err)
+	}
+}
+
+func TestTeam_ValidateAgentReferences_MissingRosterAgent(t *testing.T) {
+	team := NewTeam("test", "1.0.0").WithAgents("qa", "documentation")
+
+	err := team.ValidateAgentReferences([]string{"qa"})
+	if err == nil {
+		t.Fatal("ValidateAgentReferences() = nil, want error for missing roster agent")
+	}
+	if !strings.Contains(err.Error(), `roster references agent "documentation"`) {
+		t.Errorf("error = %q, want it to mention the missing roster agent", err.Error())
+	}
+}
+
+func TestTeam_ValidateAgentReferences_MissingOrchestrator(t *testing.T) {
+	team := NewTeam("test", "1.0.0").
+		WithAgents("qa").
+		WithOrchestrator("release-coordinator")
+
+	err := team.ValidateAgentReferences([]string{"qa"})
+	if err == nil {
+		t.Fatal("ValidateAgentReferences() = nil, want error for missing orchestrator")
+	}
+	if !strings.Contains(err.Error(), `orchestrator references agent "release-coordinator"`) {
+		t.Errorf("error = %q, want it to mention the missing orchestrator", err.Error())
+	}
+}
+
+func TestTeam_ValidateAgentReferences_MissingWorkflowStepAgent(t *testing.T) {
+	team := NewTeam("test", "1.0.0").
+		WithAgents("qa").
+		WithWorkflow(&Workflow{
+			Type: WorkflowChain,
+			Steps: []Step{
+				{Name: "docs-validation", Agent: "documentation"},
+			},
+		})
+
+	err := team.ValidateAgentReferences([]string{"qa"})
+	if err == nil {
+		t.Fatal("ValidateAgentReferences() = nil, want error for missing workflow step agent")
+	}
+	if !strings.Contains(err.Error(), `workflow step "docs-validation" references agent "documentation"`) {
+		t.Errorf("error = %q, want it to mention the missing step agent", err.Error())
+	}
+}
+
+func TestTeam_ValidateAgentReferences_LoopStepsAreSkipped(t *testing.T) {
+	// A step assigned to a Loop (not an Agent) must not be flagged, even
+	// though its Agent field is empty.
+	team := NewTeam("test", "1.0.0").
+		WithAgents("qa").
+		WithWorkflow(&Workflow{
+			Type: WorkflowChain,
+			Steps: []Step{
+				{Name: "docs-fix", Loop: "docs-fix"},
+			},
+		})
+
+	if err := team.ValidateAgentReferences([]string{"qa"}); err != nil {
+		t.Errorf("ValidateAgentReferences() = %v, want nil (loop steps have no agent to validate)", err)
+	}
+}
+
+func TestTeam_ValidateAgentReferences_DuplicateReferencesReportedOnce(t *testing.T) {
+	// "documentation" appears in both the roster and a workflow step; it
+	// should be reported once per distinct reference kind, not silently
+	// deduplicated across kinds (roster vs. step are different findings).
+	team := NewTeam("test", "1.0.0").
+		WithAgents("documentation").
+		WithWorkflow(&Workflow{
+			Type: WorkflowChain,
+			Steps: []Step{
+				{Name: "docs-validation", Agent: "documentation"},
+				{Name: "docs-validation-again", Agent: "documentation"},
+			},
+		})
+
+	err := team.ValidateAgentReferences(nil)
+	if err == nil {
+		t.Fatal("ValidateAgentReferences() = nil, want error")
+	}
+	joined, ok := err.(interface{ Unwrap() []error })
+	if !ok {
+		t.Fatalf("error does not support errors.Join Unwrap() []error: %T", err)
+	}
+	// roster + step "docs-validation" + step "docs-validation-again" = 3;
+	// the second step reusing "documentation" is still a distinct step
+	// name, so it is not deduplicated with the first.
+	if got := len(joined.Unwrap()); got != 3 {
+		t.Errorf("len(joined errors) = %d, want 3, got: %v", got, err)
 	}
 }

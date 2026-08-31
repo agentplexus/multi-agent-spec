@@ -2,6 +2,7 @@ package multiagentspec
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 )
 
@@ -279,6 +280,50 @@ func (t *Team) Validate() error {
 	}
 
 	return nil
+}
+
+// ValidateAgentReferences checks that every agent name this team
+// references — its roster, its orchestrator, and any workflow step
+// assigned directly to an agent (steps assigned to a loop via Loop are
+// skipped; see Step.IsAgentStep) — resolves to a name in availableAgents.
+//
+// This performs no filesystem or network access: callers supply the set
+// of agent names actually available, typically derived from scanning
+// agent spec files in the same directory as the team definition. Pass
+// qualified names (see Agent.QualifiedName) in availableAgents if the
+// team references namespaced agents.
+//
+// It returns a joined error (see errors.Join) listing every unresolved
+// reference, or nil if all references resolve.
+func (t *Team) ValidateAgentReferences(availableAgents []string) error {
+	available := make(map[string]bool, len(availableAgents))
+	for _, name := range availableAgents {
+		available[name] = true
+	}
+
+	var errs []error
+	seen := make(map[string]bool)
+	checkRef := func(kind, name string) {
+		if name == "" || available[name] || seen[kind+":"+name] {
+			return
+		}
+		seen[kind+":"+name] = true
+		errs = append(errs, fmt.Errorf("%s references agent %q with no matching spec", kind, name))
+	}
+
+	for _, name := range t.Agents {
+		checkRef(fmt.Sprintf("team %q roster", t.Name), name)
+	}
+	checkRef(fmt.Sprintf("team %q orchestrator", t.Name), t.Orchestrator)
+	if t.Workflow != nil {
+		for _, step := range t.Workflow.Steps {
+			if step.IsAgentStep() {
+				checkRef(fmt.Sprintf("team %q workflow step %q", t.Name, step.Name), step.Agent)
+			}
+		}
+	}
+
+	return errors.Join(errs...)
 }
 
 // EffectiveLead returns the lead agent name for self-directed workflows.
