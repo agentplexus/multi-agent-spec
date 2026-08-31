@@ -807,7 +807,7 @@ Canonical tool names map to platform-specific identifiers:
 ### Go SDK
 
 ```bash
-go get github.com/plexusone/multi-agent-spec@v0.9.0
+go get github.com/plexusone/multi-agent-spec@v0.10.0
 ```
 
 Import the SDK package:

@@ -103,6 +103,7 @@ team.IsDeterministic()   // true for chain, scatter, graph
 team.IsSelfDirected()    // true for crew, swarm, council
 team.EffectiveLead()     // returns lead agent name
 team.Validate()          // validates workflow-specific requirements
+team.ValidateAgentReferences(names) // returns joined error for unresolved agent refs
 ```
 
 ### Workflow Types
@@ -353,6 +354,13 @@ team := mas.NewTeam("dev-team", "1.0.0").
 
 if err := team.Validate(); err != nil {
     log.Fatal(err) // "crew workflow requires collaboration.lead"
+}
+
+// Check the team's roster, orchestrator, and workflow steps against the
+// agents actually available, e.g. after scanning an agent spec directory.
+availableAgents := []string{"architect", "frontend", "backend", "qa"}
+if err := team.ValidateAgentReferences(availableAgents); err != nil {
+    log.Fatal(err) // e.g. `team "dev-team" roster references agent "backend-old" with no matching spec`
 }
 ```
 

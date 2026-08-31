@@ -7,6 +7,23 @@
   "maintainers": ["plexusone"],
   "releases": [
     {
+      "version": "v0.10.0",
+      "date": "2026-08-31",
+      "highlights": [
+        { "description": "`Team.ValidateAgentReferences` catches dangling agent references in roster, orchestrator, and workflow steps" }
+      ],
+      "added": [
+        { "description": "`Team.ValidateAgentReferences(availableAgents []string) error` returns a joined error listing every roster, orchestrator, or agent-assigned workflow step that references an agent name not present in the supplied list", "commit": "6a4ce04" }
+      ],
+      "documentation": [
+        { "description": "README.md: update shields", "commit": "dfb4dc8" },
+        { "description": "README: expand Loop Schema with bounded execution details", "commit": "35f1424" }
+      ],
+      "dependencies": [
+        { "description": "Go module dependencies updated", "commit": "5337131" }
+      ]
+    },
+    {
       "version": "v0.9.0",
       "date": "2026-06-28",
       "highlights": [
