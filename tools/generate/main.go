@@ -82,6 +82,17 @@ func run() error {
 		return fmt.Errorf("generating skill schema: %w", err)
 	}
 
+	// Generate ReviewBatch schema
+	if err := generateSchema(
+		&multiagentspec.ReviewBatch{},
+		filepath.Join(outputDir, "review", "review.schema.json"),
+		"Multi-Agent Spec - Review Batch Definition",
+		"Schema for a batch of agent-produced outputs awaiting or having completed human review",
+		"https://raw.githubusercontent.com/plexusone/multi-agent-spec/main/schema/review/review.schema.json",
+	); err != nil {
+		return fmt.Errorf("generating review schema: %w", err)
+	}
+
 	fmt.Println("Schema generation complete!")
 	return nil
 }
