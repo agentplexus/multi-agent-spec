@@ -105,3 +105,13 @@ func (ContentBlockType) JSONSchema() *jsonschema.Schema {
 		Description: "Content block type discriminator",
 	}
 }
+
+// JSONSchema implements jsonschema.Schema for ReviewStatus type.
+func (ReviewStatus) JSONSchema() *jsonschema.Schema {
+	return &jsonschema.Schema{
+		Type:        "string",
+		Enum:        []interface{}{"pending", "confirmed", "edited", "rejected"},
+		Default:     "pending",
+		Description: "State of a human review checkpoint",
+	}
+}
