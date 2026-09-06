@@ -106,6 +106,16 @@ func (ContentBlockType) JSONSchema() *jsonschema.Schema {
 	}
 }
 
+// JSONSchema implements jsonschema.Schema for EscalationPolicy type.
+func (EscalationPolicy) JSONSchema() *jsonschema.Schema {
+	return &jsonschema.Schema{
+		Type:        "string",
+		Enum:        []interface{}{"human", "abort", "continue", "fallback"},
+		Default:     "human",
+		Description: "Action to take when max attempts reached",
+	}
+}
+
 // JSONSchema implements jsonschema.Schema for ReviewStatus type.
 func (ReviewStatus) JSONSchema() *jsonschema.Schema {
 	return &jsonschema.Schema{
