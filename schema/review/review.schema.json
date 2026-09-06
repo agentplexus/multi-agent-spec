@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/plexusone/multi-agent-spec/main/schema/review/review.schema.json",
+  "$ref": "#/$defs/ReviewBatch",
+  "$defs": {
+    "ReviewBatch": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "items": {
+          "items": {
+            "$ref": "#/$defs/ReviewItem"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "items"
+      ]
+    },
+    "ReviewItem": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "proposed_value": true,
+        "reason": {
+          "type": "string"
+        },
+        "confidence": {
+          "type": "number"
+        },
+        "status": {
+          "$ref": "#/$defs/ReviewStatus"
+        },
+        "final_value": true,
+        "reviewer": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "reviewed_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "proposed_value"
+      ]
+    },
+    "ReviewStatus": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "confirmed",
+        "edited",
+        "rejected"
+      ],
+      "description": "State of a human review checkpoint",
+      "default": "pending"
+    }
+  },
+  "title": "Multi-Agent Spec - Review Batch Definition",
+  "description": "Schema for a batch of agent-produced outputs awaiting or having completed human review"
+}
