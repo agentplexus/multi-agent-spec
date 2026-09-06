@@ -56,6 +56,7 @@ nav:
       - Report: schemas/report.md
       - Skill: schemas/skill.md
       - Loop: schemas/loop.md
+      - Review: schemas/review.md
   - CLI:
       - mas: cli/mas.md
   - SDK:

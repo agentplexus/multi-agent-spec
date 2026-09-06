@@ -185,3 +185,4 @@ mkdocs serve
 | Deployment | Platform configuration | `sdk/go/deployment.go` |
 | Skill | Reusable capability | `sdk/go/skill.go` |
 | TeamReport | Execution results | `sdk/go/report.go` |
+| ReviewBatch | Human-in-the-loop confirmation checkpoints | `sdk/go/review.go` |
