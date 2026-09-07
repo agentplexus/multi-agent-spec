@@ -307,6 +307,38 @@ Defines inter-agent messages for self-directed workflows.
 }
 ```
 
+### Review Schema (v0.11.0+)
+
+Defines a human-in-the-loop confirmation checkpoint for agent-produced outputs
+that must be confirmed, edited, or rejected by a human before they are trusted
+or allowed to proceed — distinct from a [Loop](#loop-schema-v090)'s
+`escalation: human`, which pauses a retry loop once `max_attempts` is
+exhausted. A review checkpoint is a per-item gate usable anywhere an agent's
+output needs a human decision, such as confirming an LLM-proposed evaluation
+label before it counts as ground truth.
+
+- **Schema**: [`schema/review/review.schema.json`](schema/review/review.schema.json)
+
+```json
+{
+  "id": "domain-classify-batch-001",
+  "source": "domain-classifier",
+  "created_at": "2026-09-06T00:00:00Z",
+  "items": [
+    {
+      "id": "aiid-1621",
+      "proposed_value": "LLM",
+      "reason": "Data-exposure framing is genuinely ambiguous",
+      "confidence": 0.4,
+      "status": "pending"
+    }
+  ]
+}
+```
+
+See [Review Schema Guide](docs/schemas/review.md) for the full field reference
+and Go SDK usage.
+
 ## Workflow Types
 
 Multi-agent-spec supports two categories of workflow patterns:
